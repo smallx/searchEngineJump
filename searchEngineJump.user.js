@@ -113,7 +113,7 @@
                     width: 100%;\
                     margin-top:5px;\
                     margin-bottom: -5px;\
-                    padding-left: 128px;\
+                    padding-left: 131px;\
                     z-index: 99;\
                 ',
                 style_ACBaidu: '\
@@ -2964,7 +2964,6 @@
                     text-decoration: none;
                     font-weight:500;
                     color: #333 !important;
-                    transition: background-color 0.15s ease-in-out;
                 }
                 .sej-drop-list-trigger {
 
@@ -2984,12 +2983,8 @@
                     border-left: 5px solid transparent;
                     border-bottom: 0px solid transparent;
                     vertical-align: middle;
-                    transition: -webkit-transform 0.3s ease-in-out;
-                    transition: transform 0.3s ease-in-out;
                 }
                 .sej-drop-list-trigger-shown::after {
-                    -webkit-transform: rotate(180deg);
-                    transform: rotate(180deg);
                 }
                 .sej-engine:hover {
                     background-color: #EAEAEA;
@@ -3020,16 +3015,15 @@
                     top: -10000px;
                     left: 0;
                     min-width: 90px;
-                    border: 1px solid #FAFAFA;
+                    border: 1px solid #EBEBEB !important;
+					border-radius: 4px !important;
                     padding: 5px 0;
                     text-align: left;
                     font-size: 13px;
-                    -moz-box-shadow: 2px 2px 5px #ccc;
-                    -webkit-box-shadow: 2px 2px 5px #ccc;
-                    box-shadow: 2px 2px 5px #ccc;
+                    -moz-box-shadow: 0 5px 20px rgba(26,26,26,.1);
+                    -webkit-box-shadow: 0 5px 20px rgba(26,26,26,.1);
+                    box-shadow: 0 5px 20px rgba(26,26,26,.1);
                     background-color: white;
-                    transition: opacity 0.2s ease-in-out,
-                        top 0.2s ease-in-out;
                 }
                 @keyframes sejopen {
                     0% {
@@ -3065,8 +3059,8 @@
 
         DropDownList.prototype = {
             hidden: true,
-            showDelay: 233,
-            hideDelay: 233,
+            showDelay: 0,
+            hideDelay: 0,
             aShownClass: 'sej-drop-list-trigger-shown',
 
             init: function () {
