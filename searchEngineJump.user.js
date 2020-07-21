@@ -45,7 +45,10 @@
                 fixedTop: 52,
                 // 给引擎列表的样式
                 style: '\
-                    margin-left: 170px;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    padding-top: 5px;\
+                    padding-left: 165px;\
                     z-index: 100;\
                     margin-top:5px;\
                 ',
@@ -104,12 +107,14 @@
                 url: /^https?:\/\/www\.baidu\.com\/(?:s|baidu)/,
                 enabled: true,
                 engineList: "web",
-                fixedTop:55,
+                fixedTop:70,
                 style: '\
-                    margin-top:8px;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    margin-top:5px;\
                     margin-bottom: -5px;\
+                    padding-left: 128px;\
                     z-index: 99;\
-                    margin-left: 113px;\
                 ',
                 style_ACBaidu: '\
                     margin-top: 8px;\
@@ -131,10 +136,11 @@
                 enabled: true,
                 engineList: "web",
                 style: '\
-                    padding-left:15px;\
-                    margin-top:10px;\
-                    margin-left: 100px;\
-                    margin-bottom:-20px;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    margin-top: 10px;\
+                    margin-bottom: -13px;\
+                    padding-left: 109px;\
                 ',
                 style_ACBaidu: '\
                     text-align: center;\
@@ -215,7 +221,7 @@
                 style: "\
                         top:-46px;\
                         z-index:99;\
-                        margin-left:-5px;\
+                        margin-left:-20px;\
                 ",
                 style_ACBaidu: "\
                         top:-46px;\
@@ -237,7 +243,7 @@
                 fixedTop:56,
                 style:"\
                     margin-top:10px;\
-                    padding-left:130px;\
+                    padding-left:105px;\
                 ",
                 insertIntoDoc:{
                     keyword:'css;.input__control',
@@ -282,7 +288,7 @@
                 enabled:true,
                 fixedTop:75,
                 style:"\
-                    margin-left:-10px;\
+                    margin-left:5px;\
                     margin-bottom:10px;\
                 ",
                 insertIntoDoc:{
@@ -327,10 +333,14 @@
             {name: "百度百科词条",
                 url: /^https?:\/\/baike\.baidu\.com\/item/,
                 engineList: "knowledge",
-                fixedTop:65,
+                fixedTop:55,
                 enabled: true,
                 style: "\
-                    text-align: center;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    padding-top: 3px;\
+                    padding-bottom: 3px;\
+                    padding-left: 145px;\
                     z-index: 999999;\
                     background: #fff;\
                 ",
@@ -396,7 +406,7 @@
                 enabled: true,
                 style: "\
                         position: absolute;\
-                        padding-left: 14em;\
+                        padding-left: 15em;\
                 ",
                 insertIntoDoc: {
                     keyword: function(){
@@ -413,12 +423,12 @@
                 enabled: true,
                 fixedTop:50,
                 style: "\
-                    margin: 5px auto 0px;\
-                    width:960px;\
+                    margin: 5px auto -5px;\
+                    width:980px;\
                     z-index:19;\
                     background: #fff;\
                     box-shadow: 0 1px 3px 0 rgba(0,34,77,.05);  \
-                    padding: 5px 20px; \
+                    padding: 5px 10px; \
                 ",
                 // 兼容“知乎排版优化”
                     // https://greasyfork.org/zh-CN/scripts/21659
@@ -508,7 +518,7 @@
                 enabled: true,
                 engineList: "web",
                 fixedTop:55,
-                style: "width: 1000px;margin: 8px auto -5px;z-index:99;",
+                style: "width: 100%;margin: 8px auto -5px;padding-left:212px;z-index:99;",
                 insertIntoDoc: {
                     keyword: "//input[@name='query']",
                     target: "css;.header-box",
@@ -536,7 +546,7 @@
                 enabled: true,
                 engineList: "knowledge",
                 fixedTop:50,
-                style: "width: 1000px;margin: 8px auto 0px;z-index:99;",
+                style: "width: 100%;margin: 8px auto 0px;padding-left: 265px;z-index:99;",
                 insertIntoDoc: {
                     keyword: "//input[@name='q']",
                     target: "css;.top-bar",
@@ -770,7 +780,11 @@
                 engineList: "image",
                 fixedTop:95,
                 style: '\
-                    margin-left:110px;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    padding-top: 3px;\
+                    padding-left: 132px;\
+                    background-color:#fff;\
                     ',
                 insertIntoDoc: {
                     keyword: 'css;input#kw',
@@ -783,8 +797,10 @@
                 enabled: true,
                 engineList: "image",
                 style: '\
-                    margin-left:136px;\
-                    padding: 10px 5px 1px 22px;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    margin-bottom: -13px;\
+                    padding: 10px 5px 3px 160px;\
                     ',
                 insertIntoDoc: {
                     keyword: 'css;input[name=q]',
@@ -798,10 +814,11 @@
                 url: /^https?:\/\/.*\.bing\.com\/images\/search/i,
                 enabled: true,
                 engineList: "image",
-                fixedTop: 62,
+                fixedTop: 72,
                 style: '\
-                    padding-left:90px;\
-                    margin-top:-6px;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    padding-left: 95px;\
                     ',
                 insertIntoDoc: {
                     keyword: 'css;#sb_form_q',
@@ -815,7 +832,9 @@
                 enabled: true,
                 style: '\
                     z-index:1999;\
+                    box-sizing: border-box;\
                     width:100%;\
+                    padding-left: 135px;\
                     border-top:1px solid #EBF1FF;\
                     border-bottom:0px solid #EBF1FF;\
                     ',
@@ -983,9 +1002,10 @@
                 enabled: true,
                 engineList: "translate",
                 style: '\
-                    padding-left:1px;\
-                    margin:0px auto;\
-                    width:1220px;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    margin: 5px auto;\
+                    padding-left: 135px;\
                 ',
                 insertIntoDoc: {
                     keyword: function(){
@@ -1066,8 +1086,12 @@
                 engineList: "shopping",
                 fixedTop:51,
                 style: "\
-                    margin:10px auto -10px;\
-                    text-align: center;\
+                    box-sizing: border-box;\
+                    width: 937px;\
+                    margin-top: 10px;\
+                    margin-bottom: -10px;\
+                    margin-left: 126px;\
+                    padding-left: 114px;\
                     z-index: 99;\
                 ",
                 insertIntoDoc: {
@@ -1125,8 +1149,10 @@
                 enabled: true,
                 engineList: "shopping",
                 style: "\
-                    margin: 10px auto -10px;\
-                    text-align: center;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    margin: 10px auto -15px;\
+                    padding-left: 388px;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#key',
@@ -1169,7 +1195,7 @@
                 url: /^https?:\/\/search\.smzdm\.com\/\?/i,
                 enabled: true,
                 engineList: "shopping",
-                fixedTop:34,
+                fixedTop:38,
                 style: "\
                     text-align: center;\
                     z-index: 999;\
@@ -1254,10 +1280,12 @@
                 url: /^https?:\/\/xueshu\.baidu\.com\/(?:s|baidu)/,
                 enabled: true,
                 engineList: "scholar",
+                fixedTop:50,
                 style: '\
-                    text-align: center;\
-                    margin:0px;\
-                    top:0px;\
+                    box-sizing: border-box;\
+                    width: 100%;\
+                    text-align: left;\
+                    padding-left: 285px;\
                     z-index:99999;\
                     ',
                 insertIntoDoc: {
@@ -1271,6 +1299,7 @@
                 url: /^https?:\/\/scholar\.google(?:\.\D{1,3}){1,2}\/scholar\?/,
                 engineList: "scholar",
                 style: '\
+                    padding-left: 238px;\
                     z-index:999;\
                     position:relative;\
                 ',
@@ -2419,13 +2448,13 @@
             "debug":false,
             "fixedTop":true,
             "fixedTopUpward":false,
-            "baiduOffset":-120,
+            "baiduOffset":0,
             "getIcon":0,
             "allOpen":false,
             "center":2,
             "engineDetails":[['网页', 'web',true],['翻译', 'translate',true],['知识', 'knowledge',true],['图片', 'image',true],['视频', 'video',true],['音乐', 'music',true],['学术', 'scholar',false],  ['社交', 'sociality',true],['购物', 'shopping',true],["下载","download",true],["新闻","news",false],['mine', 'mine',false]],
             "engineList":{},
-            "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 120px;margin-bottom:-10px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
+            "rules":[{"name": "360", "url": "/^https?:\\/\\/www\\.so\\.com\\/s\\?/", "enabled": true, "engineList": "web","fixedTop":50, "style": "padding: 10px 0 0 112px;margin-bottom:-5px;z-index:3001;", "insertIntoDoc": {"keyword": "//input[@name='q']", "target": "css;#tabs-wrap", "where": "afterEnd"}}]
         }
         // --------------------可设置项结束------------------------
         // GM_deleteValue("searchEngineJumpData");
