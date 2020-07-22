@@ -419,82 +419,19 @@
 
 
             // 视频网站
-            {name: "优酷",
-                url: /^https?:\/\/www\.soku\.com\/search_video\//,
-                engineList: "video",
-                enabled: true,
-                fixedTop:54,
-                style: "\
-                    width:1190px;\
-                    margin:0 auto;\
-                    z-index:99999;\
-                ",
-                insertIntoDoc: {
-                    keyword: 'css;#headq',
-                    target: 'css;.sk_container',
-                    where: 'beforeBegin',
-                },
-            },
-            {name: "土豆",
-                url: /^https?:\/\/www\.soku\.com\/t\/nisearch\//,
-                enabled: true,
-                engineList: "video",
-                style: "\
-                    padding-left: 10px;\
-                    border-top: 1px solid #FC6500;\
-                    border-bottom: 1px solid #FC6500;\
-                    text-align: center;\
-                ",
-                insertIntoDoc: {
-                    keyword: 'css;#headq',
-                    target: 'css;body > .sk_container',
-                    where: 'beforeBegin',
-                },
-            },
             {name: "哔哩哔哩",
                 url: /^https?:\/\/search\.bilibili\.com\/all/,
                 enabled: true,
                 engineList: "video",
                 fixedTop:50,
                 style: "\
-                    width:980px;\
+                    width: 100%;\
+                    text-align: center;\
                     margin:10px auto -5px;\
                 ",
                 insertIntoDoc: {
                     keyword: 'css;#search-keyword',
                     target: 'css;.filter-wrap',
-                    where: 'beforeBegin',
-                },
-            },
-            {name: "AcFun",
-                url: /^https?:\/\/www\.acfun\.cn\/search/,
-                enabled: true,
-                engineList: "video",
-                fixedTop:46,
-                style: "\
-                    width:980px;\
-                    margin: 0 auto;\
-                ",
-                insertIntoDoc: {
-                    keyword: 'css;#search-text',
-                    target: 'css;.search-nav',
-                    where: 'afterBegin',
-                },
-            },
-            {name: "YouTube",
-                url: /^https?:\/\/www\.youtube\.com\/results/,
-                enabled: true,
-                engineList: "video",
-                fixedTop:56,
-                style: "\
-                    z-index:0;\
-                    margin-top: 62px;\
-                    margin-bottom: -80px;\
-                    text-align: center;\
-                ",
-                insertIntoDoc: {
-                    keyword: 'css;input#search',
-                    target: 'css;#page-manager',
                     where: 'beforeBegin',
                 },
             },
@@ -512,33 +449,6 @@
                     target: 'css;.tagListBox',
                     where: 'beforeBegin',
                 },
-            },
-            {name: "Iqiyi",
-                 url: /^https?:\/\/so\.iqiyi\.com\/so\/q/,
-                 enabled: true,
-                 engineList: "video",
-                 fixedTop:60,
-                 style: '\
-                        margin:0 auto;\
-                        width:1180px;\
-                        ',
-                 insertIntoDoc: {
-                    keyword: 'css;#data-widget-searchword',
-                    target: 'css;.mod_search_header',
-                    where: 'afterEnd'
-                 },
-            },
-            {name: "腾讯视频",
-                    url: /^https?:\/\/v\.qq\.com\/x\/search/i,
-                    engineList: "video",
-                    enabled: true,
-                    fixedTop:60,
-                    style: "width:1140px;margin:0 auto;",
-                    insertIntoDoc: {
-                       keyword: 'css;#keywords',
-                       target: 'css;.site_head_simple',
-                       where: 'afterEnd',
-                    },
             },
 
 
@@ -1240,52 +1150,48 @@
         engineList.video = [];
 
         engineList.video[0] = {
-            name: 'youtube',
-            url: 'https://www.youtube.com/results?search_query=%s',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAByElEQVR4nO2WTy/EQBjGf1M9ES4rQSzdlkVw2KtIcMBdfB1fQ3wWXEQiTtgI4k8k/gbBRdzYjkO33VUz7WyWuuwzeZPp9O37PH3ft52BFlr4Z4j6i7vJUZkFaf7oLOKNJjcTI5mQhxg8PheRgKvxbMlDFE7OhQ0gZTL/p9+8PtsSynXrcqwofQlJJgmsc2k5mjdqqriXY0Vp+ylvDxC6yM8PiqcXPL688DY91VAGfNQ8lpQBgakB9HZ3M3J2QcfqWkPPqsxKS39QgtqoR//8PF3rG7SvrHzzUQ1dbLMSxEpRjz7XBdflaXaO18UF8H1lDKEpgW3S31EPJDj3OA5sbALwVCrRlsvFFagF+CafmOZhpQiAchmAh0IBe8gDQKoTg61Z/84fZsBMBz2Ow/P7O22eV8uextdO+wlVJQRBDBUcekM/1uINHAkwq4CsCkh2Lrue9p42AyZfgSVEqESJgwTiEDoewwwEiMfYL6QT1wSo122TuspqF4aue94w+BVjctD3j9jNO6kSop1MCPNOjEG3owqAnf5kEbqttFkB0/fXZueBj8rfnVeiV9vuG8z0VDTzcFM7koXY6h3IRMTc423zNW2hhd/CF3jZLaCW4/+vAAAAAElFTkSuQmCC',
+            name: '哔哩哔哩',
+            url: 'https://search.bilibili.com/all?keyword=%s',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACTElEQVQ4jY2QMUsbcRjGH7n73z+m4g0OblkDpkOgRT/AKeRCYvwHzxDBBOLUzU/gF+gkjlLoKlTBxQvxCqe5u4iFkw6CATfddLPSCIWnU8/E1rYP/Jbnfd/f8ALPIqUsj4+Pe1LK8lCXBeAB8AzDeP38JokQ4u309PSP2dlZmqbZByANw8iZpvm1UCgwn88znU5/+pvgzcTExGB/f5+O4xDAewC5hYUFPj4+cn5+/huA+osCADAMw8lms8zlcpycnPySTqff2bbNVqtFALWX7kpSSk8I4aVSqVDXdY6NjdE0TU5NTVHXdQJgKpWKhBCelNLTNO0DAAkAlVar9T0MQ/Z6PYZhyDAMGUURgyBgt9tNul/96ekpd3d3mclkDqDrenR+fs7t7W0qpVitVhOUUgnD/fLyMm9ubri2tkYIIT73ej0Wi0Vubm7S930GQcBOp8N2u50w3M/MzNB1XTabTUII4UVRRKUUz87OuLOzQ8dxeH19zeFsbW1xZWWFd3d3rNVqPDw8ZKPReBJUq1WGYUilFAHw+Ph4RGBZFgEwjmPW63W6rjsqUEqx0+mw3+/T930OBoMRweXlJX3f5/39Pcvl8p8F7XY7OdjY2ODc3FzCxcVFMisUCr8LlpaW6Pt+shTH8cgTHx4eklmpVHr6ga7rQRzHrFQqzOfztG2btm3TcRzW6/WExcVF2rbNYrFI0zTZ7Xa5vr5OaJr2cW9vj1dXVzw6OqLruv/k5OSEt7e3tCxrAACvMpnMwerqKhuNxn/RbDZpWdZA07TKT3uI/eaBFtmBAAAAAElFTkSuQmCC',
+            blank:true,
         };
         engineList.video[1] = {
-            name: 'bilibili',
-            url: 'http://search.bilibili.com/all?keyword=%s',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACTElEQVQ4jY2QMUsbcRjGH7n73z+m4g0OblkDpkOgRT/AKeRCYvwHzxDBBOLUzU/gF+gkjlLoKlTBxQvxCqe5u4iFkw6CATfddLPSCIWnU8/E1rYP/Jbnfd/f8ALPIqUsj4+Pe1LK8lCXBeAB8AzDeP38JokQ4u309PSP2dlZmqbZByANw8iZpvm1UCgwn88znU5/+pvgzcTExGB/f5+O4xDAewC5hYUFPj4+cn5+/huA+osCADAMw8lms8zlcpycnPySTqff2bbNVqtFALWX7kpSSk8I4aVSqVDXdY6NjdE0TU5NTVHXdQJgKpWKhBCelNLTNO0DAAkAlVar9T0MQ/Z6PYZhyDAMGUURgyBgt9tNul/96ekpd3d3mclkDqDrenR+fs7t7W0qpVitVhOUUgnD/fLyMm9ubri2tkYIIT73ej0Wi0Vubm7S930GQcBOp8N2u50w3M/MzNB1XTabTUII4UVRRKUUz87OuLOzQ8dxeH19zeFsbW1xZWWFd3d3rNVqPDw8ZKPReBJUq1WGYUilFAHw+Ph4RGBZFgEwjmPW63W6rjsqUEqx0+mw3+/T930OBoMRweXlJX3f5/39Pcvl8p8F7XY7OdjY2ODc3FzCxcVFMisUCr8LlpaW6Pt+shTH8cgTHx4eklmpVHr6ga7rQRzHrFQqzOfztG2btm3TcRzW6/WExcVF2rbNYrFI0zTZ7Xa5vr5OaJr2cW9vj1dXVzw6OqLruv/k5OSEt7e3tCxrAACvMpnMwerqKhuNxn/RbDZpWdZA07TKT3uI/eaBFtmBAAAAAElFTkSuQmCC',
+            name: '爱奇艺',
+            url: 'https://so.iqiyi.com/so/q_%s',
+            favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIABLAQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAARJJREFUeJylk71KxFAQhb8bw7IKgbW0sxUuiPgA2ttsodhaLOwDiBDyALKNnYWBFJYiKttspUhaQRAh4GMoBDSkuRZOdHTDkrgHBs6dnzNT3ANzwkSJXQUOgPVuJ+gDFGVe29ztBEh9DDwD5z7wBPT+Nr5/5BOdW1oMdtSzL7Hly/Db8SBbbnN6lNhXYLvNTC1MGFsHHAJrwEDVJsA9cCKbUrWx4qmnBlYARsPMzFh4JPENX5Q2G1x7BewKv6uSnpzTBBeKn2mBX3DO1V4zGmbXdXxKoC2mBE5v9h/nUnx4udwLY+vC2N426TdRYh3//4k9UxH4MQsw0wvKbKkPbCBu5MsgFGWOt4A2D0WZ6wVjxI2fleZQvCOg+1AAAAAASUVORK5CYII=',
+            blank:true,
         };
         engineList.video[2] = {
-            name: '优酷',
-            url: "http://www.soku.com/search_video/q_%s",
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABnElEQVQ4jZ2Sv2vCUBDHv4OFYEAeRrFihjeYLl3eILRDhkcXKQg6tWAHs4W6WBAq2CWCFLe4CS7ZOhWyuHTK4uDmpKtD/4As3dOhOYk/SrGBg3fc+37u7vsCAOztPud/DXhEseoUN7cX6Qbi7/Yi3Vh1ihuqT+pZDwADAIyqzE2KKWatfEDiY/W5XVgCAGatfEBdm0K1mkK1+pI5NAF1jgWsKVSLIE2hWr92GFWZCwCUJ1ea24Xl14BHfckcAIDJFTmpZz0qUJhckX8CyINRlbnnDDw5kckVmVzB5Ip8vMo87ayw/wIUnz093AceMxkAWF8yh8z87Onh233Ov8yfCbpgckVSo7ldWMa7s1h+zjV77Gfunl0SKNcNS+t6AUqGUG8enuhMdc0e+5o99gEAqXJF6tN1pE/XEYkpz9Tajtb1AjoTgOqpckXuAJLiorsIUTLESYB9MQD8C5B/eV+SSScBNHvs70MIwFpD78CzkiEOTGStoZcEZmptZ5t3vaDoLkJ9uo4Krx+bn3lKhtjuTT9GDImfliWhW3Hs0Tdk6pGCP1WKswAAAABJRU5ErkJggg==',
-        };
-        engineList.video[3] = {
             name: '腾讯视频',
             url: 'https://v.qq.com/x/search/?q=%s',
             favicon: 'data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACNUlEQVR4nK2SS0iUYRSGn/P/42UcLCXDIoykaKhlSVCbGlu1MkgSJKE20saoyG2Q7QNpF0RIi6goXKQkLoIQhjBCNBAddFLGWw0q3ua/nxa/82eF0KID3+K7vC/Peb8DO+pKWi80p9W5mtbH/GPJzs3loUAFkOKp6GylbSR7UmLtZmDoAI06gE4P78+2nj7FvorPuB64HnieHF41tdD00c/sSqDvREHpPXF2zj24eAgRBBida2d4phORkCiEMu73peTh7wZvRQGeNJzbiu/JVYSC0EQERnIdfJm9HRmpqDN40SxHQp2BDTjgyHLcsn2aEkNcivfjOAa2E3Cytpu2M/WUmrPYruI6lKbe+0GqX4+GBM8MRaA7VYsI3Kqbj/BWvEle5htDIoGJpTbS2a5tOiHmm/UGFmBBwfax7AAliAyqY8e5eSBHmVeHZfkcqerBdn0sByxH2fDd0Rh2mJBl+wjClreKIWa4MBlf72Vxc4piNpZtIGj41aJPY1gCohTsAAE2/B+YlLDsZHk+3RKFZ3s1vB4ZRUTDFmAqc6PsTgw7jHtzrdqPlefNnonrLBbGoz5F4EPmBQtrKRDdNtQ3ufZ4M0AMJ+x374qxtVITVH5b/RoJx+Y7GVsozsI2NpLMd8QniznFsJnAkGTD0rLftzdARPg084ip/DUoCgFBX63fS7T8NYkAerdkMBuv+p5MZFqVkl8X4W3WtRLHeCDBn+LoSVRdGx4iZjggOqR+4vxuwv9WPwHg2/J5NFR2OgAAAABJRU5ErkJggg==',
+            blank:true,
+        };
+        engineList.video[3] = {
+            name: '优酷',
+            url: "https://so.youku.com/search_video/q_%s",
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABnElEQVQ4jZ2Sv2vCUBDHv4OFYEAeRrFihjeYLl3eILRDhkcXKQg6tWAHs4W6WBAq2CWCFLe4CS7ZOhWyuHTK4uDmpKtD/4As3dOhOYk/SrGBg3fc+37u7vsCAOztPud/DXhEseoUN7cX6Qbi7/Yi3Vh1ihuqT+pZDwADAIyqzE2KKWatfEDiY/W5XVgCAGatfEBdm0K1mkK1+pI5NAF1jgWsKVSLIE2hWr92GFWZCwCUJ1ea24Xl14BHfckcAIDJFTmpZz0qUJhckX8CyINRlbnnDDw5kckVmVzB5Ip8vMo87ayw/wIUnz093AceMxkAWF8yh8z87Onh233Ov8yfCbpgckVSo7ldWMa7s1h+zjV77Gfunl0SKNcNS+t6AUqGUG8enuhMdc0e+5o99gEAqXJF6tN1pE/XEYkpz9Tajtb1AjoTgOqpckXuAJLiorsIUTLESYB9MQD8C5B/eV+SSScBNHvs70MIwFpD78CzkiEOTGStoZcEZmptZ5t3vaDoLkJ9uo4Krx+bn3lKhtjuTT9GDImfliWhW3Hs0Tdk6pGCP1WKswAAAABJRU5ErkJggg==',
+            blank:true,
         };
         engineList.video[4] = {
+            name: 'YouTube',
+            url: 'https://www.youtube.com/results?search_query=%s',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAByElEQVR4nO2WTy/EQBjGf1M9ES4rQSzdlkVw2KtIcMBdfB1fQ3wWXEQiTtgI4k8k/gbBRdzYjkO33VUz7WyWuuwzeZPp9O37PH3ft52BFlr4Z4j6i7vJUZkFaf7oLOKNJjcTI5mQhxg8PheRgKvxbMlDFE7OhQ0gZTL/p9+8PtsSynXrcqwofQlJJgmsc2k5mjdqqriXY0Vp+ylvDxC6yM8PiqcXPL688DY91VAGfNQ8lpQBgakB9HZ3M3J2QcfqWkPPqsxKS39QgtqoR//8PF3rG7SvrHzzUQ1dbLMSxEpRjz7XBdflaXaO18UF8H1lDKEpgW3S31EPJDj3OA5sbALwVCrRlsvFFagF+CafmOZhpQiAchmAh0IBe8gDQKoTg61Z/84fZsBMBz2Ow/P7O22eV8uextdO+wlVJQRBDBUcekM/1uINHAkwq4CsCkh2Lrue9p42AyZfgSVEqESJgwTiEDoewwwEiMfYL6QT1wSo122TuspqF4aue94w+BVjctD3j9jNO6kSop1MCPNOjEG3owqAnf5kEbqttFkB0/fXZueBj8rfnVeiV9vuG8z0VDTzcFM7koXY6h3IRMTc423zNW2hhd/CF3jZLaCW4/+vAAAAAElFTkSuQmCC',
+            blank:true,
+        };
+        engineList.video[5] = {
             name: 'AcFun',
             url: 'https://www.acfun.cn/search/?type=complex&keyword=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAADfElEQVQ4jX3MbUzUdQDA8b/1xrW1tlhrtmatF1qrVk5opajLUScgJtoIxXjQ1iobqzaV1MCWqZm2EumO8+C4Bw4OMsC8EGgeWkqi8vy/P8cBJ8cdTwccj/6u+4/79qLVy77b9+1Hcvb4Q2/oukS6SRZZ5YrItLpEpkUW71pkkVgRFO+b/xTZpjaRYXGLTKtLZJUrYpdZFhpdl6htHwpJSSVukkr7SDV5iNcqpJR5eK9S5hW74LjRyrcXCkmyTbKn0kuKsY94rUKa1cN2k4fXi3uRMiwusblYIafKS0FjgG0lCqvLwphs5/EVPk+sXZD9k4/kkl52mvspaAqwUddLvE4hy6IIKUHbKfKbAtwcmqfZO4dveoHnKiDb1EqbLpkXqyOsqoY1himGphZpH7mPdyrMSecIa87cEdLnlwbFF40BfmyZoEYOsQgMd15G+9UOFMMWhg3x1J3YSGdLHTfno/zcOcW/7atQhLTV0C2OXvHjUGbIKXcTBGZvFcEhCbX4SdA+AoclFp2HqFqE75tH/wMK6geFlGNTRFiNAnDs+hK3w9B2PgH13EOM6V5iTL+WvwofpjV/BUEV6obg+G/D2LtCHKsfFNIHdrcgusTcEuT5obPmBDN5EsEfnmBK/zKh4hcY18cy+tkDdBW9ybAKehe4/CEO/zIgpCyrIpx+ldnQGO1nXgXdMqKODSg6DSHtM8yeXo773AbUoBuqH6PxwxWw4CcgIMvqEtLRSx5xbQFqzPlwRCJ33TLWxq3nXscNVG0Mc2cfJSg3kLb3INt3ZhAtkGg8GYdjHs5e9QqpWRkXWj8cOfA23F3Jyth9SMtXoQYHWGo+yMwtI0QmiXn8aR6MWQfBWvK+/Jhv2iPc9k4KKc3YLVYXBflE7wChsL+ogafW5xIdbSI67UUdkWHOyabsU8Tt/RrCPnIvh3j2Ow/bDN1C2m2WRYK+l7fq70OfA3QfEf69HGabQa6CHjtMXyVyx86S9gD06Pm0IcBrF3ykl8n/AFvN99hT42f8j2oi1aeIdNcy0X+N8dZaxlouMqE4CSu/ol48zex1C/sdwySU+cgwuYSUWOom1eRmt9XDFtsomivzaCrHSDQMkGwLkGIbJbF0EI0tQGLDPBr7OO+YPaSX95OgdyPV3h0KbSrsEOkmWewwKiL1/y51iVSjItJNsthc1CFMN7yhvwH03PqrfJ8h8gAAAABJRU5ErkJggg==',
-        };
-        engineList.video[5] = {
-            name: '乐视',
-            url: 'http://so.letv.com/s?wd=%s',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABjElEQVQ4ja2SPS+DURTH/9yXPs/tc59WWxK9tfkCFgwiNLUIQWMhqhEsQopFRcTCwOAlIp2MEiFBwmcghobZ5i1I6iUm2zVoG1KetImT/HKm80v+5xzgq9xJZm2kXN6jEFCLUqsOtPlRKv1u1+hp7l4uWVAPGr6RQX0nlZ512ZslCxpAW6+zgiSz1v9LwBpA2yKER8OE9+SIEB5tIq4OAJajYIS6k49S6Vup9I0M5rmVQZ2RSi9yz7ajYIyKhYyt9F126DuvUukV5tn5VTDD5GouQgvh3T3EiHcSI9ZBjMEuYgxFiTHcTnifDfh+FcwxawsABUBKXuKVVa3PRFVmT/jTh8J3cSACl7l+IgLpUeqeBVBeIGgEjTxnl/UglX6WoQI+7Bp9LipfAXgKBAEgmHJVHB+LwMWO6T/bzePLc2D4TmPMnARQ5pSGF527iBKdxIgNMDPRz8zxPmZODDAzEWfmVC8xRiygynE6wa2llz/+4M0O6TXu3XcUxJk5dZ897c9PVPpJKj3/dW58AkPWtgVm+sp6AAAAAElFTkSuQmCC',
             blank:true,
         };
         engineList.video[6] = {
-            name: '搜狐',
-            url: 'http://so.tv.sohu.com/mts?wd=%s',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACk0lEQVQ4jW2SXUhTYRjHf2furH1vns0tc+p01YbSaRRGFGmElRWhRVR0VzeBCUkRKRQUURFBUYtMsAsvwqSLboqKii76oOjLLsKwLBLOjsM+iBEiEk8XOtCDD7zwwvv//57/+7wvWEpX1WUXqud33U1XPn+2cuHgm4bk9xeNqc+Xl1f0eiFi1c8s+wHNd6gzWpxZ7XXtrHBQMx/itR413RYPdbysXzQ80qxPnFkay8zp3jXP1V7ncPS74BbQD6ywavbGQm25lrTcXJN4OOtgS5G6L4oyDogNRYDfpdCUBN0KaYp4t+da0nJcX3AeAB+EU9gmAFGnzH8B2xlcmTElJBk8N6yQW8vjT7Lblv7zQZj1FHUVzNOAdoBruHsNRRMzlJCPkUVja7E3FQBxB6nRzbqc0MsuosKwfdpcBJOAE+Aq7l4DTQybJmY0KWagUnpw3wb8AN8aUuMvG2uGscFPUMSOIgrkC10yBQCaGASksL+Cqw/gQ13C/LKhJo8Xfi7DLo6p+JOAfVaCGesxvo/VsBhgKJ3IDzWk/rAV9XMvPtmPUw7gEmC3FfCV4EQrjo5CuhgsNPWEPK2rHqQFNWOiyQBBGUOTbjw5gIu4rxtocg//W+sPvBMKvzKXJKSzouQsXoiMEJzMKSEx0OQXmjzA/zoJej32DdYnvGLz9GVLy2SktmoSCALQifOsYQtL1rlg+r5B+UQwfw53dzOOPZso2nEC16UBAjljXolkY+VysCR4bBa5B/dtMxCX0Qpdst6YGPinp188a5BZX1S6wlq/NRkAR3Ce+l6amvixrlnGVm2U0bIayXrLxVAjYqDJsFI83urwdMxpnlH+o3bv6UclVR8GwlXmO2fUvE/g/WGcJwG3VfwfeW39pYdUeeAAAAAASUVORK5CYII=',
+            name: 'niconico',
+            url: 'https://www.nicovideo.jp/search/%s',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAASUlEQVQ4jWNgoCYwMTH5b2Ji8p9ceZwKidZIsY2kYhQDSAW0MYAUg8h2AbJltA8DWGiTZQB6lJHlApK8QFFCghlCMMmSoZYgAAAvUMVwhox/egAAAABJRU5ErkJggg==',
             blank:true,
         };
-        engineList.video[7] = {
-            name: 'niconico',
-            url: 'http://www.nicovideo.jp/search/%s',
-            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAASUlEQVQ4jWNgoCYwMTH5b2Ji8p9ceZwKidZIsY2kYhQDSAW0MYAUg8h2AbJltA8DWGiTZQB6lJHlApK8QFFCghlCMMmSoZYgAAAvUMVwhox/egAAAABJRU5ErkJggg==',
-        };
-        engineList.video[8] = {
-            name: '爱奇艺',
-            url: 'http://so.iqiyi.com/so/q_%s',
-            favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAAAIABLAQAAFgAAAIlQTkcNChoKAAAADUlIRFIAAAAQAAAAEAgGAAAAH/P/YQAAARJJREFUeJylk71KxFAQhb8bw7IKgbW0sxUuiPgA2ttsodhaLOwDiBDyALKNnYWBFJYiKttspUhaQRAh4GMoBDSkuRZOdHTDkrgHBs6dnzNT3ANzwkSJXQUOgPVuJ+gDFGVe29ztBEh9DDwD5z7wBPT+Nr5/5BOdW1oMdtSzL7Hly/Db8SBbbnN6lNhXYLvNTC1MGFsHHAJrwEDVJsA9cCKbUrWx4qmnBlYARsPMzFh4JPENX5Q2G1x7BewKv6uSnpzTBBeKn2mBX3DO1V4zGmbXdXxKoC2mBE5v9h/nUnx4udwLY+vC2N426TdRYh3//4k9UxH4MQsw0wvKbKkPbCBu5MsgFGWOt4A2D0WZ6wVjxI2fleZQvCOg+1AAAAAASUVORK5CYII=',
-        };
+
 
         // 音乐搜索列表
         engineList.music = [];
