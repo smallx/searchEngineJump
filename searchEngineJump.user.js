@@ -1,8 +1,9 @@
 // ==UserScript==
+
 // @name           searchEngineJump 搜索引擎快捷跳转
-// @author         NLF&锐经(修改) & iqxin(再修改)
-// @contributor    iqxin
-// @description    方便的在各个搜索引擎之间跳转,增加可视化设置菜单,能更友好的自定义设置,修复百度搜索样式丢失的问题
+// @author         NLF&锐经(修改) & iqxin(再修改) & smallx(再再修改)
+// @contributor    iqxin & smallx
+// @description    方便的在各个搜索引擎之间跳转, 增加可视化设置菜单, 能更友好的自定义设置, 可一个页面同时并排展示谷歌百度搜索结果
 // @version        5.21.2
 // @created        2011-07-02
 // @lastUpdated    2020-05-04
@@ -29,19 +30,23 @@
     'use strict';
 
     console.log("脚本: 搜索引擎快捷跳转 --- 开始执行 --- 发布者: qxin --- GitHub:https://github.com/qxinGitHub/searchEngineJump ← 问题反馈地址")
+    
     function iqxinstart(){
         // 根据规则把搜索引擎列表插入到指定网站
         var rules = [
-            // 网页搜索/////////////第一个可以当模板看
-            {name: "google网页搜索",// 你要加载的网站的名字(方便自己查找)
-                // 是否启用.
+
+            // 网页
+            {
+                // 你要加载的网站的名字(方便自己查找)
+                name: "google网页搜索",
+                // 是否启用
                 enabled: true,
-                // 在哪个网站上加载,正则.
+                // 在哪个网站上加载, 正则
                 url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^?]+\?(?!tbm=)(?:&?q=|(?:[^#](?!&tbm=))+?&q=)(?:.(?!&tbm=))*$/,
                 // 加载哪个类型的列表:
                 // ['web'|'music'|'video'|'image'|'shopping'|'translate'|'knowledge'|'sociality']
                 engineList: 'web',
-                // 若固定到顶栏,是否给一个高度
+                // 若固定到顶栏, 是否给一个高度
                 fixedTop: 52,
                 // 给引擎列表的样式
                 style: '\
@@ -57,8 +62,7 @@
                     z-index: 100;\
                     margin-top:5px;\
                 ',
-
-                // 插入文档,相关
+                // 插入文档
                 // target 将引擎跳转工具栏插入到文档的某个元素
                     // (请使用xpath匹配,比如: '//*[@id="subform_ctrl"]'  或者 css匹配(请加上 'css;' 的前缀),比如: 'css;#subform_ctrl' );
                 // keyword 使用 xpath 或者 css选中一个form input元素 或者 该项是一个函数,使用返回值
@@ -79,7 +83,8 @@
                 // 修改源网页用来适应跳转栏
                 stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important}'
             },
-            {name: "google-hash-query",// 不刷新页面显示搜索结果的google
+            {
+                name: "google-hash-query",// 不刷新页面显示搜索结果的google
                 enabled: true,
                 url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^#]*#(?:&?q=|.+?&q=).+/,
                 engineList: 'web',
@@ -103,7 +108,8 @@
                 },
                 stylish: 'body.vasq #hdtbMenus.hdtb-td-o{top:100px !important}'
             },
-            {name: "百度网页搜索",
+            {
+                name: "百度网页搜索",
                 url: /^https?:\/\/www\.baidu\.com\/(?:s|baidu)/,
                 enabled: true,
                 engineList: "web",
@@ -131,7 +137,8 @@
                 },
                 stylish:".headBlock,.se_common_hint{display:none !important}"
             },
-            {name: "必应网页搜索",
+            {
+                name: "必应网页搜索",
                 url: /^https?:\/\/[^.]*\.bing\.com\/search/,
                 enabled: true,
                 engineList: "web",
@@ -154,7 +161,8 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "搜狗",
+            {
+                name: "搜狗",
                 url: /^https?:\/\/www\.sogou\.com\/(?:web|s)/,
                 enabled: true,
                 engineList: "web",
@@ -177,7 +185,8 @@
                 },
                 stylish:"#float_uphint{display:none;}",
             },
-            {name:"yandex",
+            {
+                name:"yandex",
                 url:/^https?:\/\/yandex\.com\/search/i,
                 engineList:"web",
                 enabled:true,
@@ -192,7 +201,8 @@
                     where:'beforeBegin',
                 },
             },
-            {name: "google网页分类搜索",
+            {
+                name: "google网页分类搜索",
                 enabled: true,
                 url: /^https?:\/\/www\.google(?:\.[A-z]{2,3}){1,2}\/[^?]+\?(?:tbm=)(?:&?q=|(?:[^#](?!&tbm=))+?&q=)(?:.(?!&tbm=))*$/,
                 engineList: 'web',
@@ -210,7 +220,8 @@
             },
 
             // 知识
-            {name: "百度百科词条",
+            {
+                name: "百度百科词条",
                 url: /^https?:\/\/baike\.baidu\.com\/item/,
                 engineList: "knowledge",
                 fixedTop:55,
@@ -230,7 +241,8 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "百度百科搜索",
+            {
+                name: "百度百科搜索",
                 url: /^https?:\/\/baike\.baidu\.com\/search/,
                 engineList: "knowledge",
                 enabled: true,
@@ -245,7 +257,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "百度文库",
+            {
+                name: "百度文库",
                 url: /^https?:\/\/wenku\.baidu\.com\/search/i,
                 engineList: "knowledge",
                 enabled: true,
@@ -264,7 +277,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "百度知道",
+            {
+                name: "百度知道",
                 url: /^https?:\/\/zhidao\.baidu\.com\/search/i,
                 engineList: "knowledge",
                 enabled: true,
@@ -280,7 +294,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "维基百科",
+            {
+                name: "维基百科",
                 url: /^https?:\/\/\D{2,5}\.wikipedia\.org\/wiki/i,
                 engineList: "knowledge",
                 enabled: true,
@@ -297,7 +312,8 @@
                     where: 'afterBegin',
                 },
             },
-            {name: "知乎",
+            {
+                name: "知乎",
                 url: /^https?:\/\/www\.zhihu\.com\/search\?/i,
                 engineList: "knowledge",
                 enabled: true,
@@ -327,7 +343,8 @@
                 },
                 stylish:".TopSearch.Card{margin:30px auto;}",
             },
-            {name: "互动百科搜索页",
+            {
+                name: "互动百科搜索页",
                 url: /^https?:\/\/so\.baike\.com\/doc/i,
                 engineList: "knowledge",
                 enabled: true,
@@ -343,7 +360,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "互动百科词条页",
+            {
+                name: "互动百科词条页",
                 url: /^https?:\/\/www\.baike\.com\/wiki/i,
                 engineList: "knowledge",
                 enabled: true,
@@ -359,7 +377,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "豆丁文档",
+            {
+                name: "豆丁文档",
                 url: /^https?:\/\/www\.docin\.com\/search\.do/,
                 engineList: "knowledge",
                 enabled: true,
@@ -376,7 +395,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "微信(搜狗)",
+            {
+                name: "微信(搜狗)",
                 url: /^https?:\/\/weixin\.sogou\.com\/weixin\?/,
                 enabled: true,
                 engineList: "web",
@@ -388,7 +408,8 @@
                     where: "afterEnd",
                 },
             },
-            {name: "Quora",
+            {
+                name: "Quora",
                        // https://www.quora.com/search?q=china
                 url:  /^https?:\/\/www\.quora\.com\/search\?/i,
                 enabled: true,
@@ -404,7 +425,8 @@
                     where: "beforeEnd",
                 },
             },
-            {name: "StackOverflow",
+            {
+                name: "StackOverflow",
                 url: /^https?:\/\/stackoverflow\.com\/search\?/i,
                 enabled: true,
                 engineList: "knowledge",
@@ -417,9 +439,9 @@
                 },
             },
 
-
-            // 视频网站
-            {name: "哔哩哔哩",
+            // 视频
+            {
+                name: "哔哩哔哩",
                 url: /^https?:\/\/search\.bilibili\.com\/all/,
                 enabled: true,
                 engineList: "video",
@@ -435,7 +457,8 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "niconico",
+            {
+                name: "niconico",
                 url: /^https?:\/\/www\.nicovideo\.jp\/search\//,
                 enabled: true,
                 engineList: "video",
@@ -451,9 +474,9 @@
                 },
             },
 
-
             // 音乐
-            {name: "虾米音乐",
+            {
+                name: "虾米音乐",
                 url: /^https?:\/\/www\.xiami\.com\/search/,
                 enabled: true,
                 engineList: "music",
@@ -467,7 +490,8 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: 'QQ音乐',
+            {
+                name: 'QQ音乐',
                 url: /^https?:\/\/s\.music\.qq\.com/i,
                 enabled: true,
                 engineList: 'music',
@@ -482,7 +506,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: '网易云音乐',
+            {
+                name: '网易云音乐',
                 url: /^https?:\/\/music\.163\.com\/.*?#\/search/i,
                 enabled: true,
                 engineList: 'music',
@@ -498,9 +523,9 @@
                 },
             },
 
-
             // 图片
-            {name: "百度图片",
+            {
+                name: "百度图片",
                 url: /^https?:\/\/image\.baidu\.com\/search/i,
                 enabled: true,
                 engineList: "image",
@@ -518,7 +543,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "谷歌图片",
+            {
+                name: "谷歌图片",
                 url: /^https?:\/\/\w{2,10}\.google(?:\.\D{1,3}){1,2}\/[^?]+\?.*&tbm=isch/i,
                 enabled: true,
                 engineList: "image",
@@ -536,7 +562,8 @@
                     // where: 'beforeEnd',
                 },
             },
-            {name: "必应图片",
+            {
+                name: "必应图片",
                 url: /^https?:\/\/.*\.bing\.com\/images\/search/i,
                 enabled: true,
                 engineList: "image",
@@ -553,9 +580,9 @@
                 },
             },
 
-
-            //翻译词典
-            {name: "谷歌翻译",
+            // 翻译词典
+            {
+                name: "谷歌翻译",
                 url: /^https?:\/\/translate\.google(?:\.\D{1,4}){1,2}/i,
                 enabled: true,
                 engineList: "translate",
@@ -569,7 +596,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "百度翻译",
+            {
+                name: "百度翻译",
                 url: /^https?:\/\/fanyi\.baidu\.com/i,
                 enabled: true,
                 engineList: "translate",
@@ -587,7 +615,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "必应翻译",
+            {
+                name: "必应翻译",
                 url: /^https?:\/\/.*\.bing\.com\/dict\/search\?q\=/i,
                 enabled: true,
                 engineList: "translate",
@@ -601,7 +630,8 @@
                     where: 'beforeEnd',
                 },
             },
-            {name: "有道词典",
+            {
+                name: "有道词典",
                 url: /^https?:\/\/youdao\.com\/w/i,
                 enabled: true,
                 engineList: "translate",
@@ -620,7 +650,8 @@
                     where: 'beforeEnd',
                 },
             },
-            {name: "海词词典",
+            {
+                name: "海词词典",
                url: /^https?:\/\/dict\.cn\/./,
                enabled: true,
                engineList: "translate",
@@ -639,7 +670,8 @@
            },
 
             // 购物
-            {name: "淘宝搜索",
+            {
+                name: "淘宝搜索",
                 url: /^https?:\/\/s\.taobao\.com\/search/,
                 enabled: true,
                 engineList: "shopping",
@@ -669,7 +701,8 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "天猫超市搜索",
+            {
+                name: "天猫超市搜索",
                 url: /^https?:\/\/list\.tmall\.com\/search_product\.htm.*from=chaoshi/i,
                 enabled: true,
                 engineList: "shopping",
@@ -688,7 +721,8 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "天猫搜索",
+            {
+                name: "天猫搜索",
                 url: /^https?:\/\/list\.tmall\.com\/search_product\.htm/i,
                 enabled: true,
                 engineList: "shopping",
@@ -703,7 +737,8 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "京东",
+            {
+                name: "京东",
                 url: /^https?:\/\/search\.jd\.com\/Search/,
                 enabled: true,
                 engineList: "shopping",
@@ -719,7 +754,8 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "苏宁",
+            {
+                name: "苏宁",
                 url: /^https?:\/\/search\.suning\.com/i,
                 enabled: true,
                 engineList: "shopping",
@@ -735,9 +771,9 @@
                 },
             },
 
-
-            //社交
-            {name: "微博",
+            // 社交
+            {
+                name: "微博",
                 url: /^https?:\/\/s\.weibo\.com\/weibo\//i,
                 enabled: true,
                 engineList: "sociality",
@@ -753,7 +789,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "贴吧",
+            {
+                name: "贴吧",
                 url: /^https?:\/\/tieba\.baidu\.com\/f\/search/i,
                 enabled: true,
                 engineList: "sociality",
@@ -769,7 +806,8 @@
                     where: 'beforeBegin',
                 },
             },
-            {name: "豆瓣1",
+            {
+                name: "豆瓣1",
                 url: /^https?:\/\/(movie|music|book)\.douban\.com\/subject_search?/,
                 enabled: true,
                 engineList: "sociality",
@@ -785,7 +823,8 @@
                     where: 'afterEnd'
                 },
             },
-            {name: "豆瓣2",
+            {
+                name: "豆瓣2",
                 url: /^https?:\/\/www\.douban\.com\/search/i,
                 enabled: true,
                 engineList: "sociality",
@@ -802,9 +841,9 @@
                 },
             },
 
-
-            //学术搜索列表
-            {name: "百度学术",
+            // 学术
+            {
+                name: "百度学术",
                 url: /^https?:\/\/xueshu\.baidu\.com\/(?:s|baidu)/,
                 enabled: true,
                 engineList: "scholar",
@@ -822,7 +861,8 @@
                     where: 'afterEnd',
                 },
             },
-            {name: "谷歌学术",
+            {
+                name: "谷歌学术",
                 enabled: true,
                 url: /^https?:\/\/scholar\.google(?:\.\D{1,3}){1,2}\/scholar\?/,
                 engineList: "scholar",
@@ -837,157 +877,6 @@
                     where: 'beforeBegin'
                 }
             },
-            {name: "cnki",
-                url: /^http:\/\/search\.cnki\.net\/search\.aspx/i,
-                enabled: true,
-                engineList: "scholar",
-                style: '\
-                    padding-left:15px;\
-                    border-top:1px solid #D9E1F7;\
-                    border-bottom:1px solid #D9E1F7;\
-                    margin-top:-1px;\
-                    ',
-                insertIntoDoc: {
-                    keyword:'css;#txtSearchKey',
-                    target:'css;.main',
-                    where:'afterBegin',
-                },
-            },
-            {name: "知网",
-                enabled: true,
-                url: /^http:\/\/epub\.cnki\.net\/kns\/brief\/default_result\.aspx/i,
-                engineList: "scholar",
-                style: '\
-                    border-bottom:1px solid #E5E5E5;\
-                    border-top:1px solid #E5E5E5;\
-                    z-index:999;\
-                    position:relative;\
-                    ',
-                insertIntoDoc: {
-                    keyword:'css;#txt_1_value1',
-                    target:'css;#TopSearchBar',
-                    where:'afterEnd',
-                }
-            },
-            {name: "万方",
-                enabled: true,
-                url: /^https?:\/\/s\.g\.wanfangdata\.com\.cn\/Paper\.aspx/i,
-                engineList: "scholar",
-                style: '\
-                    border-bottom:1px solid #E5E5E5;\
-                    border-top:1px solid #E5E5E5;\
-                    z-index:999;\
-                    position:relative;\
-                    ',
-                insertIntoDoc: {
-                    keyword:'css;#queryBox',
-                    target:'css;#content',
-                    where:'beforeBegin',
-                }
-            },
-            {name: "EBSCO",
-                enabled: true,
-                url: /^http:\/\/.*?ebscohost\.com\/.*?results/i,
-                engineList: "scholar",
-                style: '\
-                    border-bottom:1px solid #E5E5E5;\
-                    border-top:1px solid #E5E5E5;\
-                    position:relative;\
-                    ',
-                insertIntoDoc: {
-                    keyword:'css;#SearchTerm1',
-                    target:'css;#findFieldOuter',
-                    where:'afterend',
-                }
-            },
-            {name: "Springer",
-                enabled: true,
-                url: /^http:\/\/link\.springer\.com\/search\?query=/i,
-                engineList: "scholar",
-                style: '\
-                    border-bottom:1px solid #E5E5E5;\
-                    border-top:1px solid #E5E5E5;\
-                    position:relative;\
-                    ',
-                insertIntoDoc: {
-                    keyword:'css;#query',
-                    target:'css;#content',
-                    where:'beforeBegin',
-                }
-            },
-            {name: "JSTOR",
-                enabled: true,
-                url: /^https?:.*?jstor.org\/action\/doAdvancedSearch/i,
-                engineList: "scholar",
-                style: '\
-                    border-bottom:1px solid #E5E5E5;\
-                    border-top:1px solid #E5E5E5;\
-                    position:relative;\
-                   ',
-                insertIntoDoc: {
-                    keyword:'css;#searchBox',
-                    target:'css;.tabs-search-results',
-                    where:'beforeBegin',
-                }
-            },
-
-            // 其他补充， 这个脚本将会朝重型方向发展，如果嫌弃代码过多，可自行删减无用代码
-            {
-                name: "infinitynewtab",
-                enabled:true,
-                //https://google.infinitynewtab.com/?q=苹果
-                url:/^https?:\/\/google\.infinitynewtab\.com\/\?q/,
-                engineList:"web",
-                style:'\
-                    text-align:center;\
-                    position:fixed;\
-                    z-index:99999;\
-                    top:0;\
-                   ',
-               insertIntoDoc: {
-                   target: 'css;.searchbox-results',
-                   // keyword: '//input[@name="search"]',
-                   keyword: 'css;input.gsc-input',
-                   where: 'beforeBegin',
-               }
-            },
-             {
-                name: "startpage",
-                enabled:true,
-                //https://www.startpage.com/do/search?q=
-                url:/^https?:\/\/www\.startpage\.com\/do\/search/,
-                engineList:"web",
-                fixedTop:70,
-                style:'\
-                    text-align:center;\
-                    position:fixed;\
-                    z-index:99999;\
-                    top:70px;\
-                    margin-left:257px;\
-                    background-color:#fff;\
-                   ',
-               insertIntoDoc: {
-                   target: 'css;.header',
-                   keyword: '//input[@name="query"]',
-                   // keyword: 'css;input#gsc-i-id1',
-                   where: 'beforeEnd',
-               }
-            },
-
-            // 回家没网,用8090端口离线测试使用。
-            {
-                name:"test",
-                enabled:true,
-                url:/^https?:\/\/127\.0\.0\.1:8090\/./,
-                style:"\
-                    margin:150px;\
-                ",
-                insertIntoDoc: {
-                    keyword:function(){return false},
-                    target:'css;body',
-                    where:'beforeEnd',
-                }
-            }
         ];
 
         // 搜索引擎列表
@@ -1024,19 +913,18 @@
         // 网页搜索列表
         engineList.web = [];
 
-        // engineList.web[0] 中间的数字表示排序(数字不能重复,否则后面的会覆盖掉前面的),越小数字越靠前,小于0该引擎不会显示在页面上
+        // 中间的数字表示排序(数字不能重复,否则后面的会覆盖掉前面的),越小数字越靠前,小于0该引擎不会显示在页面上
         engineList.web[0] = {
             // 搜索引擎名称
             name: 'Google',
-            // 搜索引擎地址,关键字变量用%s代替
+            // 搜索引擎地址, 关键字变量用%s代替
             url: 'https://www.google.com/search?q=%s&ie=utf-8&oe=utf-8',
-            // 搜索引擎的站点图标
-            // favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACyElEQVQ4jXWT72tTdxTGv4yN+cY/oMFGqQpD7ZjtsAF/oPEXGFhtbUEn4mSTatSJVua0UNNSEG/01UAH0m6dN1hdW5SbrE3sgkr1hb9lRTFW3Upqcy1NzE1yc/Prfvaia7dM+7w853keznM4R4h38aHdbt8gSZJbURSv3++/Jsuyp6GhwWm1Wsvew/8XNptteTAYvMEMiKjquMvlahVCzHpHXFdXV69pWhLAHHtNSm7nbdMhYo170U61kLkZnDZSFMUrhJg9La6qqrLpum4A6FcuM+5YReRTK5HyUiLlViJLSolULiB2eA+mFgdAlmWPEOIDIYT4aHBw8DaA3tODavuESMV8orvqSZ7/Af1XD/HW71HXVKKdbsPUU9OT1NTU1Aq73b4BgPhLJrYtY2zxQuKtxzATWlH+/MvnYJpFtUAgMCDcbvcZAHOkjXSHIH50LYW3iZn2WIRoNBoTiqJ4AfIPq8n1CwrDB4pIPw5kcP6k0+hJ0+hJ8+0vaU5eNdCzk30RCAQGAPL311PwCnjVXGSw+7zOvIMa5UcTVDQl+Ox4Aoc7yfg/QwpZlj0A5pNvML2Cp/d2FhmExgrceZHn0Z952q9nqGhKsONsCiMP2Ww2J5xO534A481V3N1lLL24md/Dd96b2dWdZfF3Gi29xqR5KDQsSkpK5kaj0ZhhFtgVbKOkfTUru7+kK+RjNKkSzyR4FgvRHOzn8+YJVrakefxXHgBJkk4LIYRwuVytAOHUG7b2H8basZr5netY2/sVm737WHZpC3M6VrDk3Aku3Jq8g9HR0TGLxWKdOsaPfT7fbwBaLsWZBx1svPI1i+RNlP28jsquLWz3H8E3cg0AwzAyDofji/+/w+zOzs4LU3mTZprHE8+4q/7BcGJkeg/hcPh1dXV1zYwfWVtbW9fX1+dXVXV8SpTL5fJDQ0NPJElyWyyW0v/y/wbuo60BpWkyAAAAAABJRU5ErkJggg==',
+            // 搜索引擎的站点图标, base64编码
             favicon: icon.google,
             // 弃用；搜索引擎编码（默认utf-8）如果跳转后乱码可以填写 'gbk'
             // 弃用：encoding: 'utf-8',
             // 如果网站使用的gbk编码
-            gbk:false,
+            gbk: false,
             // 新标签页打开
             // blank: true,
             // 禁用
@@ -1133,7 +1021,6 @@
             blank: true,
         };
 
-
         // 视频搜索列表
         engineList.video = [];
 
@@ -1186,7 +1073,6 @@
             blank: true,
         };
 
-
         // 音乐搜索列表
         engineList.music = [];
 
@@ -1194,6 +1080,7 @@
             name: '网易云音乐',
             url: 'https://music.163.com/#/search/m/?s=%s',
             favicon: 'data:image/png;base64,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',
+            blank: true,
         };
         engineList.music[1] = {
             name: 'QQ音乐',
@@ -1211,6 +1098,7 @@
             name: '虾米音乐',
             url: 'https://www.xiami.com/list?scene=search&type=song&query={%22searchKey%22:%22%s%22}',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAtCAMAAAANxBKoAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAaVBMVEUAAAD/SRL/QAD/QQ//QQ//tKD/////9/X/5N3/+vn/g2L/XDH/akP/6OL/Sxv/XzX/f13/QxL/YTf/VSn//f3/b0j/y73/dE//h2j/hmb//Pv/kHP/1Mn/lXn/noX/+/v/7+v/e1j/0MSu9ko9AAAABHRSTlMADgjRgAAj2gAAAAFiS0dEBmFmuH0AAAAHdElNRQfkBxgHHTckEo/CAAAA+UlEQVRIx53V1xaDIAwAUAdNh93T7vH/H1lGQUQTk+ahFs89MSCSLHORKyqKLI5SDUXZ4EFrQoQ9Z2LH2zWPBmpv3QAdVPK8o3GeJ1UDzXs1jNmaqqZHq4lIm4tEs2bppjgNI0pDiJkZVvrPHNWLRoPXafosTr0MKxg04Dr+USuAteEblt4C7Oxz9mydvFhcH6xWx5jj+uS0HdZszct9tvrCrLv2axItOa6vWht7o9f7l+5Ovst0nzzIfZLuQaOf6B5Usv0discD+S5ffP2WfPOi84Q623p1hc6y6Gp0SQrh+Z30hg9uXV9T3Pijpwn7pbAX6yhI6/v8F9TyI14wuF9wAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIwLTA3LTIzVDIzOjI5OjU1KzA4OjAwnOf6yAAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMC0wNy0yM1QyMzoyOTo1NSswODowMO26QnQAAAAASUVORK5CYII=',
+            blank: true,
         };
         engineList.music[4] = {
             name: '咪咕音乐',
@@ -1232,21 +1120,25 @@
             name: '百度图片',
             url: 'https://image.baidu.com/search/index?tn=baiduimage&ie=utf-8&word=%s',
             favicon: icon.baidu,
+            blank: true,
         };
         engineList.image[1] = {
             name: '搜狗图片',
             url: 'https://pic.sogou.com/pics?query=%s',
             favicon: icon.sogou,
+            blank: true,
         };
         engineList.image[2] = {
             name: '谷歌图片',
             url: 'https://www.google.com/search?q=%s&tbm=isch',
             favicon: icon.google,
+            blank: true,
         };
         engineList.image[3] = {
             name: '必应图片',
             url: 'https://www.bing.com/images/search?q=%s',
-            favicon: icon.bing
+            favicon: icon.bing,
+            blank: true,
         };
         engineList.image[4] = {
             name: 'pixiv',
@@ -1273,8 +1165,7 @@
             blank: true,
         };
         
-
-        // 购物列表
+        // 购物搜索列表
         engineList.shopping = [];
 
         engineList.shopping[0] = {
@@ -1317,51 +1208,56 @@
             disable: true,
         };
 
-
-        //翻译列表
+        // 翻译搜索列表
         engineList.translate = [];
 
         engineList.translate[0] = {
             name: '百度翻译',
             url: 'https://fanyi.baidu.com/#auto/zh/%s',
             favicon: 'data:image/x-icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPzbt074plC+9Y0e9PWIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1jR70+KZQvvzbuEwAAAAAAAAAAAAAAAD6wYWE9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//rBhYQAAAAA/Nu4TPWIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//zbuEz4plC+9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/+KZQvvaOIPL1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1jh/y9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/2kyr//vDh//vRpP/3okf/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//aRJv////////////7w4f/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/3oET//u/g//7v4P/2lCz/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9o8i/////////////vDh//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//ekS/////////////aWMP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/2jyL////////////96tb/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/96RL////////////9pYw//WIFP/1iBT/96NJ//ecO//2mDP/9pIn//WNHv////////////3q1v/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/3pEv////////////2ljD/9YgU//m5df////////////////////////////////////////v3//3n0P/948j//N/A//zdvf/817H//Nex//ixZP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//ekS/////////////aWMP/1iBT/9o8i//aYM//3n0L/96BD//elTf/4qFT////////////+8ub/+bt4//rAhP/7zJr//Ny5//3r2P/94sb/9Y0d//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/96RL////////////9pYw//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP////////////3s2f/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/3pEv////////////2ljD/9YgU//WIFP/2kCX/+saO//m9ff/5tWz/+Kxc/////////////vLl//aOIP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//ekS/////////////aWMP/1iBT/9YgU//rGjv/+7+D//vfu//748P////////////////////////////////////////////rHkP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/96RL////////////9pYw//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFf////////////727f/3okf/+KtZ//mzav/5tGv/9YgV//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/3pEv////////////2ljD/9po3//rGjv/4qlb/9Y4f//WIFP/1iBT/9YgU/////////////vjx//WIFP/1iBT/9pg0//m3cP/6x5D/9Y0d//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//ekS/////////////aWMP/1iBT/+KdS//3kyv///Pn//N6+//m1bf/2jyP//eXM//rEiv/2mjf/+bl0//3o0v/////////////////82rb/9Y0d//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/817H//Nex//zXsf/817H//OHD////////////9pYw//WIFP/1iBT/9YgU//irWv/969j///////758//6xYz/+bJn//7x5P/////////////////////////////////+7dz/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU///////////////////////////////////////2ljD/9YgU//WIFP/1iBT/9YgU//WKGP/5vHv///r1////////////////////////+fT//N28//rCh//4rFz/9po3//WLGv/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9pgz//aYM//2mDP/9pgz//aYM//2mDP/9pgz//WKGP/1iBT/9YgU//WIFP/1iBT/9YgU//WJF//83r7//////////////////eLF//WMHP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/+8uY///////+7t7//efP////////////+9Km//WJF//1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//irWv//////+9Wr//aOIP/2jiD//eXM////////////+86e//WIFf/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//rDiP/+9+///vfv//m2bv/1iBT/9YgU//WIFP/1jh///vLm//rJlf/1iBX/9YgU//WIFP/2kyn//vPn////////////+sWN//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/+seQ////////////+bl1//WIFP/2kCX//vLm//758////fv//efQ//zhxP/82bP/+9Gk//rJlP/82bT///////////////7//eLF//aXMv/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/6x5D////////////5uXX/9YgU//aYM//4sGL/+LBj//m4cv/5vHr/+sOJ//vLmP/70qb//Nm0//zfwP/+9Or////////////6xo//9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WMHP/2kCT/9pAk//WLGv/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WNHv/837//+r+B//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/2jiDy9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9o4g8vimUL71iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/4plC+/Ny5TPWIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//zbuEwAAAAA+sGFhPWIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/6wYWEAAAAAAAAAAAAAAAA/Nu4TPimUL71jh/y9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WIFP/1iBT/9YgU//WOH/L4plC+/Ny5TAAAAAAAAAAA4AAAB4AAAAGAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAABgAAAAeAAAAc=',
+            blank: true,
         };
         engineList.translate[1] = {
             name: '有道词典',
             url: 'https://youdao.com/w/%s',
             favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACYh7O8mIez/JiHs/yYh7P8mIezPJiHsYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmIez/JiHs/yYh7P8mIez/JiHs/yYh7P8mIezPJiHsEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJiHsjyYh7EAmIexAJiHscCYh7N8mIez/JiHs/yYh7M8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmIewQJiHs3yYh7P8mIez/JiHsYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmIewHJiHsVSYh7P8mIez/JiHs/yYh7N8mIez/JiHs/yYh7M8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJiHsMiYh7P8mIez/JiHs/yYh7P8mIez/JiHs/yYh7P8mIez/JiHsIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACYh7EcmIez/JiHs/yYh7M8mIexAJiHsOSYh7HImIez/JiHs/yYh7FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAmIew5JiHs/yYh7P8mIexwAAAAAAAAAAAmIexVJiHs/yYh7P8mIeyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJiHsMiYh7P8mIez/JiHsnwAAAAAAAAAAJiHsOSYh7P8mIez/JiHsvwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACYh7BwmIez/JiHs/yYh7N8AAAAAAAAAACYh7BwmIez/JiHs/yYh7N8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJiHs/yYh7P8mIez/JiHsIAAAAAAmIewQJiHs/yYh7P8mIez/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAJiHsYCYh7P8mIez/JiHs7yYh7CAAAAAAJiHsViYh7P8mIez/JiHs7wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AADgfwAA4B8AAOAfAAD+DwAA4A8AAOAHAADgBwAA4YcAAOGHAADhhwAA8IcAAOCHAAD//wAA//8AAA==',
+            blank: true,
         };
         engineList.translate[2] = {
             name: '谷歌翻译',
             url: 'https://translate.google.com/?q=%s',
-            favicon: 'data:image/x-icon;base64,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Uf/1j1H/9Y9R//WOUP/1jlD/9Y5Q//WOUP/1jk//9Y5P//WOT//1jU//9Y1P//WNT//SfU8tAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9ZBT//WQU//1kFP/9ZBT//WQU//1kFP/9ZBT//WQU//1kFP/9ZBT//WQUv/1kFL/9ZBS//WQUv/1j1L/9Y9S//WPUv/1j1H/9Y9R//WPUf/1j1H/9Y5Q//WOUP/1jlD/9Y5P//WOT//1jk//9Y1P//WNT//yiEnvAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPWQVP/1kFT/9ZBU//WQVP/1kFT/9ZBU//WQU//1kFP/9ZBT//WQU//1kFP/9ZBS//WQUv/1kFL/9Y9S//WPUv/1j1L/9Y9S//WPUf/1j1H/9Y9R//WOUP/1jlD/9Y5Q//WOT//1jk//9Y5P//WOT//1jU//5oRNhQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD1kFT/9ZBU//WQVP/1kFT/9ZBU//WQVP/1kFT/9ZBT//WQU//1kFP/9ZBT//WQUv/1kFL/9ZBS//WQUv/1j1L/9Y9S//WPUv/1j1H/9Y9R//WPUf/1jlD/9Y5Q//WOUP/1jlD/9Y5P//WOT//1jk//9Y1P/9mAUygAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9ZBU//WQVP/1kFT/9ZBU//WQVP/1kFT/9ZBU//WQVP/1kFP/9ZBT//WQU//1kFP/9ZBS//WQUv/1kFL/9Y9S//WPUv/1j1L/9Y9R//WPUf/1j1H/9Y9R//WOUP/1jlD/9Y5Q//WOT//1jk//9Y5P/+2GTOkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPWRVf/1kVX/9ZFV//WRVf/1kVX/9ZBU//WQVP/1kFT/9ZBU//WQU//1kFP/9ZBT//WQUv/1kFL/9ZBS//WQUv/1j1L/9Y9S//WPUv/1j1H/9Y9R//WPUf/1jlD/9Y5Q//WOUP/1jk//9Y5P//WOT//ph059AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADxkFPi9ZFV//WRVf/1kVX/9ZFV//WRVf/1kFT/9ZBU//WQVP/1kFP/9ZBT//WQU//1kFP/9ZBS//WQUv/1kFL/9Y9S//WPUv/1j1L/9Y9R//WPUf/1j1H/9Y5Q//WOUP/1jlD/9Y5P//WOT//1jk//2oBTIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8pJad/WRVf/1kVX/9ZFV//WRVf/1kVX/9ZFV//WQVP/1kFT/9ZBU//WQU//1kFP/9ZBT//WQUv/1kFL/9ZBS//WPUv/1j1L/9Y9S//WPUf/1j1H/9Y9R//WOUP/1jlD/9Y5Q//WOT//1jk//841O4QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN+fgAj0kVPZ9ZFV//WRVf/1kVX/9ZFV//WRVf/1kFT/9ZBU//WQVP/1kFP/9ZBT//WQU//1kFL/9ZBS//WQUv/1j1L/9Y9S//WPUv/1j1H/9Y9R//WPUf/1jlD/9Y5Q//WOUP/1jk//9Y5P/++LUHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA35+ACPKUXHrwkFHk9ZFV//WRVf/1kVX/9ZBV//WQVf/1kFX/9ZBU//WQVP/1kFT/9ZBT//WQU//1kFP/9Y9S//WPUv/1j1L/9Y9S//WPUv/1j1L/9Y5R//WOUf/1jlH/9Y5Q//WOUP/0kFkXAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAC9FBMVEUAAABznO9RjvNPje9RkPFNh+yAgL9RguBNh+pPjO1mZsxMetnf39/R0dvi4uJLie9JgORHhep7hMJmd6pkdbl9iMNmd7vS0tZ3g7bQ0NOKiqhVkfVVkPVUkPVTkPVSj/VRjvVSkPVRj/VQjvVPjvVPjfVOjfVqmezQ0djj4+bn5+jn5+fm5ubl5eXk5OSFr/PM2vHs7e/N2/GDrfO4wNLY2N3m5ufo6OipxPHv7+/u7+/V4PDV3/Dj6O9fl/RNjPWPqtzMzNPe3uCErvPb4/BuoPRwovRrnvRpl+nIydHT09bh4eLK2fBzo/NNjPS5v9DQ0NTX19jg4ODr7PDe5fC80PFMjPWQq9zNzdPW1tjZ2dnFys67xMjq7PDf5vDO2/DS3fDK2PBMi/Vpl+fDxMzNztLS09SXpqx4j5ng4eLf4OHh4uLJ2PB0pPR9qfOxyfJLivJbdI5feIhhe4difIlkgIxmgo9lgY9kgY6YqbGBrPPc5PBvoPNonfTa4vBLi/V/m82ssryyub62vsK3vsG4v8NrhJGSpK28xcrM0tSlwvLX4O/X4PCnw/FrmOess761vMLZ2dra2tq5wMRifYrHzM9/qvPH1/Dp6/Dp7PDL2fGGr/NKivRMivOQnbFgeYnDyMvY2Nl3jpeClZ/c3Nzi4uJJivSRqthwhJN3i5mWpa1lfovHy83h4eHj4+NrmOa1ucJje4unsrjb29vd3d1JifRMifGTobNed4hhfIeKnKXf399IifRRd6yQnqq2vcNlf4uKm6Te3t5aitnIydDU1Ne4wMNmf4yIm6Ta2ttHiPRLiPG9wc7Pz9O5wcWtuLxKiPFJiPFJh/FIh/BHhvBGhvCVrNfNzdLIzM5CU7RBUrRBUbRKWrOwtMrQ0tZDVbZDVLZEVrelqcbLzNHT1NZEVbdEVLeVnMPKy9DR0dTV1dbY2NiCi7/KytDPz9LT09XW1tZve7zFxc3MzNDR0dPV1dXCwsvHyMzOztDQ0NHU1NTX19fZLLn2AAAAG3RSTlMAH9WR1PgEOaD7BUPaHNbUHNZ2D+dyD9Xa1yMkcVhlAAACa0lEQVQ4y4XTZXTTUByH4eHuzlZvg3QrDBsZjOCuAwIEGQTdYNiGS3G3BYcihVB0WFu0wBg6nHZYkRYpVqTI0C/8703LDjTn7P36e+5NT04TEpJjuXKHhoVJpFKZTCaX5xEBeUNDJRKpQiGTKVWqfPmDAd4RUCpVanWBYCDx7wIoGAykKOECAIUKiwHF3ws0miJBQIFn2OUIEFWqVquu1YZHQDpd0WIAZLgaNSMja9XWaAiiTt16UVHacAhMcQEolfXJ6AYNyZhGBEE1btI0G0QAUELNyOYt1OqWrTQERbVu07adNgB0AFRQe7ID+oHwAIrq2Klzl9j/QddusMdA3Sma7tGzF9O7j/AEBNRQ335wPC6uPzmAptmBgwYPGTosPj4hYTgGMGlGkIlwPTGSHEWz7OgxY5OSk8eNnzBxki4AJpNTphLUtOlkIsvq9TNmzpo9Z+68+QsWYkCgFpHk4iXR5FK065ctX5HCrVy1Gr0qDChozdp16zdsxLth0+YtW43btvM7dBhQOBpi0W4wGEw7d+3es3cfz6fq9gOg/bHCcdhNBw4eSjps5nlLqh+wOD3eTSaT9cjRY8dPMGbecjIWQPYqHDdZrbZTp8+knU0BkA5A788QmK0227nzFy5eupxhSUeghH/EMzpus125eu268UbaTd6CQMlSt1C3UXa73eFwZGbeuXvPyN3PMGPwb6UfOJ3Oh48eP2E4jhMDZVwul/vps+cvOIYBYAn+k5f1eF6+ev3mLeMFwIuAch73u/cfPvq8ADgxUN796fOXr1kIMBxfQeRbrfjt+4+fv7J8Pt9vb6XKOX/8fwCaQSM72Cx7bQAAAABJRU5ErkJggg==',
+            blank: true,
         };
         engineList.translate[3] = {
             name: '必应翻译',
             url: 'https://cn.bing.com/dict/search?q=%s',
-            favicon: icon.bing
+            favicon: icon.bing,
+            blank: true,
         };
         engineList.translate[4] = {
             name: '海词词典',
             url: 'http://dict.cn/%s',
             favicon: 'data:image/x-icon;base64,AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAw7AnR8KuJr/ArCTvvqsi/7ypIf+7pyD/uaYe/7ekHf+2oxz/taEb/7OgGf+ynxnvsZ4Yv7CdF0YAAAAAybUrRsezKfzEsSj/wq8m/8GtJf+/qyP/vaoi/7uoIP+6ph//uKUd/7ejHP+1ohv/tKEa/7OgGf+ynxj8sZ4XRsy4Lb/Ktiz/yLQq/8OyNv/AsUD/wLA+/7+uPv+9rT3/vKo1/7mnIv+5ph7/t6Qd/7ajHP+1oRr/s6AZ/7KfGL/PujDszbgu/8u2Lf/Px5P////////////////////////////4+PP/z8mc/7qnL/+4pR3/t6Mc/7WiG/+0oRrr0r0y/9C7Mf/OuS//z8iT///////////////////////////////////////w7uT/uqo4/7mlHv+3pB3/tqMb/9TANP/SvjP/0Lwx/8O4cP/Vz6f/0cue/8W6av/EuWn/w7ls/9XQqP///////////9/bwv+7qCD/uaYf/7ilHf/Xwjf/1cE1/9O/NP/DuXX/5uHC/9nTrf/Mty3/yrUs/8izKv/FsSj/zcWV//r59P/6+fT/u6xB/7ypIf+6px//2cU5/9jDN//WwTb/ysGE//Hv3//j4Mf/zrow/8y4Lv/Ltiz/ybQr/8CxR//z8eL/8vDi/8S7dv++qyP/vakh/9zIO//axzr/2MQ4/9HJkv/8+/f/7erc/9G9Mv/PuzD/zbkv/8u3Lf/AsUX/6+fO/+nn1f/Fu3T/wa4l/7+sI//eyz3/3ck8/9vHOv/TzJb//////+/u4//UvzT/0r4z/9C8Mf/NujD/x7+H/+bjzv//////wrRL/8SwJ//Crib/4M0//9/LPf/dyjz/1M2X///////v7eH/w7hs/8i9dv/MwoH/19Ks//Tz7P//////3tq+/8m1K//Hsyr/xLEo/+LPQP/hzT//38w+/9HEb///////7uze/+Xgv//u7Nf/+Pfv////////////6ujZ/8q5P//MuC7/yrYs/8i0Kv/k0ELr489B/+HOQP/gzT//1M2U/+XizP/l4L//7uzX//X06//s6tz/0cmQ/9G9PP/RvDL/z7ow/825Lv/Lty3r5dJDv+TRQv/j0EH/4s5A/+HNP//fzD7/3so9/9zJO//bxzr/2cQ4/9fDN//VwTX/1L80/9K9Mv/QuzH/zrkvvebSREXm0kP85dFC/+TQQv/jz0H/4c5A/+DMPv/fyz3/3ck8/9vIO//axTn/2MQ4/9bCNv/UwDX/074z/NG8MUUAAAAA5tJERubSRL7l0kPt5NFC/+PPQf/izkD/4c0//9/MPv/eyj3/3Mk7/9vHOv/ZxDjt18M3vtXBNUYAAAAAgAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAEAAA==',
+            blank: true,
             disable: true,
         };
         engineList.translate[5] = {
             name: 'CNKI翻译',
             url: 'http://dict.cnki.net/dict_result.aspx?scw=%s',
             favicon: icon.cnki,
+            blank: true,
             disable: true,
         };
         engineList.translate[6] = {
             name: '汉典',
             url: 'https://www.zdic.net/hans/%s',
             favicon: 'data:image/x-icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAABILAAASCwAAAAAAAAAAAAAAALHlAACw8gAAsPIAALDyAACw8gAAsPIAALDyAACw8gAAsPIAALDy0NDw/f//////////bGzR9wAAsPICArHyBgay8gAAsPKoqOT6//////r6/f8iIrv0AACw8gAAsPIAALDyAACw8gAAsPIAALDyAACw8gAAsPIAAKjyJia72wAAsf8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsP/Fxe3///////////9tbdL/AACw/wAAsP8AALD/AACw/4qK2////////////y0tvv8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAArv8LC7L+AACx8gAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/7u76v///////////z09w/8AALD/AACw/wAAsP8AALD/XFzN////////////WFjL/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACx/wAArvQAALHyAACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/lZXe////////////Hx+6/wAAsP8AALD/AACw/wAAsP9aWsz///////////9iYs7/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALH/AACv8wAAsfIAALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsP9HR8b//////+Xl9/8AALD/AACw/wAAsP8AALD/AACw/1xczf///////////yYmvP8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAr/8FBbHxAACx8gEBsP8FBbL/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/zU1wP//////8/P7/wYGsv8AALD/AACw/wAAsP8AALD/XFzN////////////QUHE/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACp/yMjuesAALHySUnH/+/v+v8SErb/AACw/wAAsP8AALD/AACw/wAAsP8AALD/NDTA////////////OjrC/wAAsP8AALD/AACw/wAAsP9gYM7///////////9JScf/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AAK7/CAiy8RsbufOKitv//////3R01P8AALD/AACw/yUlu/8oKLz/AACw/wAAsP+MjNv///////////+Bgdj/AACw/wAAsP8AALD/AACw/zY2wf///////////3Bw0/8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsv8AAK7zNDTB9aSk4///////i4vb/wAAsP/Dw+z///////////+treb/iIja//z8/v///////////4SE2f8AALD/a2vR/3x81v82NsH/R0fG////////////9fX8/2pq0f9cXM3/s7Pn/9PT8f94eNX/AACw/wAAsP8AALD/AACw/wEAsPIrK730m5vg//////91ddT/KCi8////////////////////////////////////////////8PD6/+fn+P////////////////////////////////////////////////////////////////9bW8z/AACw/wAAsP8AALD/AACw8goKsvN2dtX//////8rK7/8AALD/y8vv//T0/P//////3t71/+zs+f/u7vr/8/P7//////////////////////////////////////////////////Dw+v/9/f7//////////////////////z8/xP8AALD/AACw/wAAsP8AALDyAACx8mho0P//////1dXy/wAAsP8tLb7/Gxu4/wQEsf9cXM3//////3t71v8AALD/Ly+//xcXt/9eXs3////////////q6vj/LCy+/x8fuv86OsL/Fha3/wAAsP9JScf/ZGTP/2Fhzv8oKLz/AACw/wsLs//Bwez/8vL7/0tLx/YYGLjzgoLY//////+Tk97/AACw/wAAsP8AALD/AACw/5mZ3////////////05OyP8AALD/AACw/yYmvP///////////52d4f8AALD/AACw/wAAsP8XF7f/dXXU/ycnvP8AALD/AACw/wAAsP8AALD/nJzg////////////wcHs/IGB2Pjq6vj//////8vL7/8AALD/AACw/wAAsP8AALD/cHDT////////////ysrv/wAAsP8AALD/VFTK////////////bGzR/wAAsP8AALD/AACw/6qq5f//////29v0/wAAsP8AALD/AACw/yAguv////////////////+Ojtz5Tk7J9ry86v///////////6qq5f8AALD/AACw/wAAsP9UVMr////////////NzfD/AACw/wAAsP8ODrT/8vL7//////+Tk97/AACw/wAAsP9ra9H////////////T0/H/AACw/wAAsP8AALD/kZHd////////////hYXZ/wAAsfIQELbzeHjV/////////////////9DQ8P9eXs3/AACw/4mJ2v////////////7+//97e9b/SEjG/6qq5f////////////X1/P91ddT/eHjV//39/v///////////6Sk4/8AALD/AACw/1lZzP///////////+bm9/8AALD/AACw8gAAsfIAALD/cnLT//////////////////////+kpOP/bm7S////////////////////////////////////////////////////////////////////////////7u76/yoqvf9vb9L/////////////////k5Pe/wAAsv8AAK7zAACx8hERtf8fH7r/x8fu/////////////////3Z21f8vL7/////////////l5ff/1tby//f3/f/9/f7///////////////////////////////////////////////////////////////////////Pz+/8WFrf/AACu/woKsvAAALHyBASx/wAAsP+Fhdn///////////9iYs7/AACw/wAAsP/p6fj//////2Rkz/8AALD/AACw/0dHxv////////////X1/P+goOL/3t71/////////////v7///r6/f//////////////////////gYHY/wAAsP8AAKj/Kiu76QAAsPIAALD/AACw/3x81v//////xMTt/wAAsP8AALD/Ghq4//7+////////aWnR/wAAsP8AALD/CAiy/+/v+v//////xcXt/wAAsP83N8H///////////9+ftf/AACw/0ZGxv/g4PX///////////+amuD/AACw/wAAr/8GB7HwAACv8gAAsf8AALD/lZXe///////k5Pf/Cgqz/wAAsP92dtX///////////9yctP/AACw/wAAsP8AALD/1dXy//////+6uur/AACw/wkJs//39/3//////1dXy/8AALD/AACw/42N3P///////////8rK7/8AALD/AACw/wAAsPQAALDyAACx/ygovP+cnOD////////////x8fv/+/v+/////////////////+7u+v81NcD/AACw/yUlu//k5Pf//////8/P8P8DA7H/OzvC//v7/v//////wsLs/yYmvP+AgNj/6Oj4////////////5OT3/wAAsP8AAKf/Kiq76wAAsPIAALH/IyO7/6Ki4v/////////////////////////////////////////////////+/v///v7///////////////////j4/f/7+/7/////////////////////////////////////////////////ODjB/wAArP8XF7bsAACw8gAAsf8AALD/ubnp////////////w8Ps/wUFsv+zs+f////////////y8vv/8vL7///////////////////////9/f7//f3+///////////////////////29vz/+vr9//////////////////////91ddT/AACx/wAAr/MAALDyAACx/wAAsP/Cwuz///////////+rq+X/AACw/zU1wP///////////5KS3f8NDbT/KCi8/4qK2////////////35+1/9ERMX/39/1/////////////////zw8w/8KCrP/Z2fQ//Ly+////////////7i46f8AALD/AACw8gAAsPIAALH/AACw/7m56f///////////1tbzP8AALD/MDC/////////////hoba/wAAsP8AALD/ERG1//n5/f//////dnbV/wAAsP8AALD/x8fu////////////WFjL/wAAsP8AALD/lpbe////////////2Njz/wAAsP8AALHyAACw8gAAsP8AALD/bW3S////////////ICC6/wAAsP9YWMv////////////NzfD/HBy5/wAAsP9HR8b///////////+jo+L/AACw/wAAsP99fdf////////////Bwez/AACw/wAAsP9VVcr////////////Q0PD/AACw/wAAsPIAALHyAACw/wAAsP8HB7L/f3/X/09PyP8AALD/AACw/1NTyv////////////////8gILr/AACw/zMzwP///////////5WV3v8AALD/AACw/3x81v///////////+np+P8CArH/AACw/wAAsP9ubtL/ubnp/zg4wf8AALD/AACx8gAAsfIAALD/AACw/wAAsP8AALD/AACw/wAAsP8AALD/QEDE/////////////////y4uvv8AALD/TU3I////////////k5Pe/wAAsP8AALD/QEDE/////////////////yQku/8AALD/AACw/wAAsP8AALD/AACw/wAAsP8AALDyAACx8gAAsP8AALD/AACw/wAAsP8AALD/AACw/wAAsP8BAbD/2dnz//////+2tuj/AACw/wAAsP+Ghtr////////////Hx+7/AACw/wAAsP8AALD/09Px////////////IiK7/wAAsP8AALD/AgKx/w0NtP8AALD/AACw/wAAsPIAALH/AACx/wAAsf8AALH/AACx/wAAsf8AALH/AACx/wAAsf8aGrn/YmLP/w4Otf8AALH/AACx/5SU3v///////////6ys5v8AALD/AACw/wAAsf8zM8H/tbXo/1VVy/8AALH/AACx/wAAsf8AAKz/Jye6/wsLs/8AAKr/AACs/wAAseUAAK/yAACv8gAAr/IAAK/yAACv8gAAr/IAAK/yAACv8gAAr/IAAK/yAACv8gAAr/IAAK/yXl7M9///////////PDzB9QEBr/IBAa/yAACv8gEBr/IEBLDyAACv8gAAr/IAAK/yAACu8g8PtPItLbz0DxCz8B4eud0XF7bWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
+            blank: true,
             disable: true,
         };
         
-
-        //知识列表
+        // 知识搜索列表
         engineList.knowledge = [];
         engineList.knowledge[0] = {
             name: '知乎',
@@ -1447,38 +1343,44 @@
             disable: true,
         };
 
-        //社交列表
+        // 社交搜索列表
         engineList.sociality = [];
 
         engineList.sociality[0] = {
             name: '微博',
             url: 'https://s.weibo.com/weibo/%s',
             favicon: icon.weibo,
+            blank: true,
         };
         engineList.sociality[1] = {
             name: '贴吧',
             url: 'https://tieba.baidu.com/f?kw=%s&ie=utf-8',
             favicon: icon.baidu,
+            blank: true,
         };
         engineList.sociality[2] = {
             name: '知乎',
             url: 'https://www.zhihu.com/search?q=%s',
             favicon: icon.zhihu,
+            blank: true,
         };
         engineList.sociality[3] = {
             name: '豆瓣',
             url: 'https://www.douban.com/search?q=%s',
             favicon: icon.douban,
+            blank: true,
         };
         engineList.sociality[4] = {
             name: 'Twitter',
             url: 'https://twitter.com/search?q=%s',
             favicon: icon.twitter,
+            blank: true,
         };
         engineList.sociality[5] = {
             name: 'Facebook',
             url: 'https://www.facebook.com/search/results.php?q=%s',
             favicon: 'data:image/x-icon;base64,AAABAAIAEBAAAAEAIABoBAAAJgAAACAgAAABACAAqBAAAI4EAAAoAAAAEAAAACAAAAABACAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAs2hCtbJnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L///////////+yZ0L/smdC/7JnQv+yZ0L/s2hCtbJnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC////////////smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv///////////7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L///////////+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC////////////smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv///////////7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/////////////////////////////////8WMcP+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv/////////////////////////////////RpI3/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv///////////7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L///////////+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC//ny7v//////z6GK/7NoQ/+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv/ixbf/////////////////2bOh/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/t3BO/+LGuP/59PH///7+/9evm/+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/s2hCtbJnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/s2hCtQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAIAAAAEAAAAABACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAsmlCSbNnQuOyZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L//////////////////////7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/s2dC47JpQkmzZ0LjsmdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv//////////////////////smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/s2dC47JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC//////////////////////+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L//////////////////////7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv//////////////////////smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC//////////////////////+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L//////////////////////7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv//////////////////////smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC//////////////////////+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L//////////////////////7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv//////////////////////smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC//////////////////////+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv/////////////////////////////////////////////////////////////////SpZD/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/////////////////////////////////////////////////////////////////969rf+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/////////////////////////////////////////////////////////////////6tXK/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv/////////////////////////////////////////////////////////////////27Oj/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv//////////////////////smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC//////////////////////+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L//////////////////////7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv//////////////////////s2lF/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC//fv6//////////////////Kl33/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/69fN//////////////////nz8P/Iknj/tWxI/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv/bt6X///////////////////////////////////////////+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7ZvTP/37ur//////////////////////////////////////7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/8aNcf/48e3/////////////////////////////////smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7ZvTP/atqT/7dzT//n08f///////v38//fv6/+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7NpRP+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/s2dC47JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7NnQuOyaUJJs2dC47JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+yZ0L/smdC/7JnQv+zZ0LjsmlCSQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA',
+            blank: true,
         };
 
         // 学术搜索列表
@@ -1488,41 +1390,49 @@
             name: '谷歌学术',
             url: 'https://scholar.google.com/scholar?hl=zh-CN&q=%s',
             favicon: 'data:image/x-icon;base64,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',
+            blank: true,
         };
         engineList.scholar[1] = {
             name: '百度学术',
             url: 'http://xueshu.baidu.com/s?wd=%s',
             favicon: icon.baidu,
+            blank: true,
         };
         engineList.scholar[2] = {
             name: '知网',
             url: 'http://epub.cnki.net/kns/brief/default_result.aspx?txt_1_value1=%s&dbPrefix=SCDB&db_opt=CJFQ%2CCJFN%2CCDFD%2CCMFD%2CCPFD%2CIPFD%2CCCND%2CCCJD%2CHBRD&singleDB=SCDB&action=scdbsearch',
             favicon: icon.cnki,
+            blank: true,
         };
         engineList.scholar[3] = {
             name: '万方',
-            url: 'http://s.g.wanfangdata.com.cn/Paper.aspx?q=%s',
-            favicon: 'data:image/x-icon;base64,AAABAAQAEBAAAAEAIABoBAAARgAAABgYAAABACAAiAkAAK4EAAAgIAAAAQAgAKgQAAA2DgAAMDAAAAEAIACoJQAA3h4AACgAAAAQAAAAIAAAAAEAIAAAAAAAQAQAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//////+L/////////////////////////4g0N///////i///////////////////////////////iAAD//wAA////////////4v///+L////i////4v////8UFP///////////+L////////////////////i/////wAA//8AAP//////////////////////////////////FBT////////////////////////////i////xv////8AAP//AAD//////////////////////////////////xQU/////////////////+L//////////////8b/////AAD//wAA//////////////////////////////////8UFP///////////+L////////////////////G/////wAA//8AAP//////////////////////////////////FBT//////+L////////////////////i////4v///+IAAP//AAD//////////////////////////////////xIS///////G/////////////////////////+L///+NAAD//wAA//////////////////////////////////8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//////////////////////////////////DQ3//////+L//////////////////////////////+IAAP//AAD////////////////////////////i/////xQU////////////4v///+L////i/////////+L/////AAD//wAA////////////4v////////////////////8UFP/////////////////i/////////////////////wAA//8AAP///////////8b/////////////////////FBT/////////////////4v/////////i//////////8AAP//AAD//////+L////////////////////G/////xQU///////i/////////////////////////+L/////AAD//wAA///////G/////////////////////////+IODv//////xv//////////////////////////////4gAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgAAAAYAAAAMAAAAAEAIAAAAAAAYAkAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD+/gAA/v4AAP//AAD+/gAA//8AAP7+AAD+/gAA/v4AAP//AAD+/gAA/v4AAP//AAD+/gAA/v4AAP//AAD+/gAA/v4AAP//AAD+/gAA//8AAP7+AAD+/gAA/v4AAP//MDD+/vT0/v709P//9PT+/vT0///09P7+9PT+/vT0/v709P//ExP+/h0d/v709P//9PT+/vT0/v709P//9PT+/vT0/v709P//9PT+/vT0///09P7+HR3+/gAA/v4AAP//MzP/////////////////////////////////////////////FBT//x4e////////////////////////////////////////////////////////Hx///wAA//8AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h4e/v7//////v7+/v7+/v7//////v7+/v7+/v7//////v7+/v/////+/v7+Hx/+/gAA/v4AAP//MzP/////////////////////////////////////////////FBT//x4e////////////////////////////////////////////////////////Hx///wAA//8AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h4e/v7//////v7+/v7+/v7//////v7+/v7+/v7//////v7+/v/////+/v7+Hx/+/gAA/v4AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h4e/v7//////v7+/v7+/v7//////v7+/v7+/v7//////v7+/v/////+/v7+Hx/+/gAA/v4AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h4e/v7//////v7+/v7+/v7//////v7+/v7+/v7//////v7+/v/////+/v7+Hx/+/gAA/v4AAP//MzP/////////////////////////////////////////////FBT//x4e////////////////////////////////////////////////////////Hx///wAA//8AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h4e/v7//////v7+/v7+/v7//////v7+/v7+/v7//////v7+/v/////+/v7+Hx/+/gAA/v4AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/hoa/v7g4P//4OD+/uDg/v7g4P//4OD+/uDg/v7g4P//4OD+/uDg///g4P7+Ghr+/gAA/v4AAP//MzP/////////////////////////////////////////////FBT//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/gAA/v4AAP//AAD+/gAA/v4AAP//AAD+/gAA/v4AAP//AAD+/gAA//8AAP7+AAD+/gAA/v4AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h0d/v709P//9PT+/vT0/v709P//9PT+/vT0/v709P//9PT+/vT0///09P7+HR3+/gAA/v4AAP//MzP/////////////////////////////////////////////FBT//x4e////////////////////////////////////////////////////////Hx///wAA//8AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h4e/v7//////v7+/v7+/v7//////v7+/v7+/v7//////v7+/v/////+/v7+Hx/+/gAA/v4AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h4e/v7//////v7+/v7+/v7//////v7+/v7+/v7//////v7+/v/////+/v7+Hx/+/gAA/v4AAP//MzP/////////////////////////////////////////////FBT//x4e////////////////////////////////////////////////////////Hx///wAA//8AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h4e/v7//////v7+/v7+/v7//////v7+/v7+/v7//////v7+/v/////+/v7+Hx/+/gAA/v4AAP//MzP/////////////////////////////////////////////FBT//x4e////////////////////////////////////////////////////////Hx///wAA//8AAP//MzP+/v7+/v7//////v7+/v/////+/v7+/v7+/v7+/v7/////FBT+/h4e/v7//////v7+/v7+/v7//////v7+/v7+/v7//////v7+/v/////+/v7+Hh7+/gAA/v4AAP//BAT+/hQU/v4UFP//FBT+/hQU//8UFP7+FBT+/hQU/v4UFP//AQH+/gIC/v4UFP//FBT+/hQU/v4UFP//FBT+/hQU/v4UFP//FBT+/hQU//8UFP7+AgL+/gAA/v4AAP//AAD+/gAA/v4AAP//AAD+/gAA//8AAP7+AAD+/gAA/v4AAP//AAD+/gAA/v4AAP//AAD+/gAA/v4AAP//AAD+/gAA/v4AAP//AAD+/gAA//8AAP7+AAD+/gAA/v4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAoAAAAIAAAAEAAAAABACAAAAAAAIAQAAAAAAAAAAAAAAAAAAAAAAAAAAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//Kir//0dH//9HR///R0f//0dH//9HR///R0f//0dH//9HR///R0f//0dH//8fH///AAD//wsL//9HR///R0f//0dH//9HR///R0f//0dH//9HR///R0f//0dH//9HR///R0f//0dH//9HR///IiL//wAA//8AAP//AAD//wAA//+Zmf///////////////////////////////////////////////////////3Bw//8AAP//KCj///////////////////////////////////////////////////////////////////////9/f///AAD//wAA//8AAP//AAD//5mZ////////////////////////////////////////////////////////cHD//wAA//8oKP///////////////////////////////////////////////////////////////////////35+//8AAP//AAD//wAA//8AAP//mZn///////////////////////////////////////////////////////9wcP//AAD//ygo////////////////////////////////////////////////////////////////////////fn7//wAA//8AAP//AAD//wAA//+Zmf///////////////////////////////////////////////////////3Bw//8AAP//KCj///////////////////////////////////////////////////////////////////////9+fv//AAD//wAA//8AAP//AAD//5mZ////////////////////////////////////////////////////////cHD//wAA//8oKP///////////////////////////////////////////////////////////////////////35+//8AAP//AAD//wAA//8AAP//mZn///////////////////////////////////////////////////////9wcP//AAD//ygo////////////////////////////////////////////////////////////////////////fn7//wAA//8AAP//AAD//wAA//+Zmf///////////////////////////////////////////////////////3Bw//8AAP//KCj///////////////////////////////////////////////////////////////////////9+fv//AAD//wAA//8AAP//AAD//5mZ////////////////////////////////////////////////////////cHD//wAA//8oKP///////////////////////////////////////////////////////////////////////35+//8AAP//AAD//wAA//8AAP//mZn///////////////////////////////////////////////////////9wcP//AAD//ygo////////////////////////////////////////////////////////////////////////fn7//wAA//8AAP//AAD//wAA//+Zmf///////////////////////////////////////////////////////3Bw//8AAP//KCj///////////////////////////////////////////////////////////////////////9+fv//AAD//wAA//8AAP//AAD//5mZ////////////////////////////////////////////////////////cHD//wAA//8oKP///////////////////////////////////////////////////////////////////////35+//8AAP//AAD//wAA//8AAP//mZn///////////////////////////////////////////////////////9wcP//AAD//ygo////////////////////////////////////////////////////////////////////////fn7//wAA//8AAP//AAD//wAA//+Zmf///////////////////////////////////////////////////////3Bw//8AAP//IiL//9bW///W1v//1tb//9bW///W1v//1tb//9bW///W1v//1tb//9bW///W1v//1tb//9bW//9oaP//AAD//wAA//8AAP//AAD//5mZ////////////////////////////////////////////////////////cHD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//mZn///////////////////////////////////////////////////////9wcP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//+Zmf///////////////////////////////////////////////////////3Bw//8AAP//Cwv//0dH//9HR///R0f//0dH//9HR///R0f//0dH//9HR///R0f//0dH//9HR///R0f//0dH//8iIv//AAD//wAA//8AAP//AAD//5mZ////////////////////////////////////////////////////////cHD//wAA//8oKP///////////////////////////////////////////////////////////////////////39///8AAP//AAD//wAA//8AAP//mZn///////////////////////////////////////////////////////9wcP//AAD//ygo////////////////////////////////////////////////////////////////////////fn7//wAA//8AAP//AAD//wAA//+Zmf///////////////////////////////////////////////////////3Bw//8AAP//KCj///////////////////////////////////////////////////////////////////////9+fv//AAD//wAA//8AAP//AAD//5mZ////////////////////////////////////////////////////////cHD//wAA//8oKP///////////////////////////////////////////////////////////////////////35+//8AAP//AAD//wAA//8AAP//mZn///////////////////////////////////////////////////////9wcP//AAD//ygo////////////////////////////////////////////////////////////////////////fn7//wAA//8AAP//AAD//wAA//+Zmf///////////////////////////////////////////////////////3Bw//8AAP//KCj///////////////////////////////////////////////////////////////////////9+fv//AAD//wAA//8AAP//AAD//5mZ////////////////////////////////////////////////////////cHD//wAA//8oKP///////////////////////////////////////////////////////////////////////35+//8AAP//AAD//wAA//8AAP//mZn///////////////////////////////////////////////////////9wcP//AAD//ygo////////////////////////////////////////////////////////////////////////fn7//wAA//8AAP//AAD//wAA//+Zmf///////////////////////////////////////////////////////3Bw//8AAP//KCj///////////////////////////////////////////////////////////////////////9+fv//AAD//wAA//8AAP//AAD//5mZ////////////////////////////////////////////////////////cHD//wAA//8oKP///////////////////////////////////////////////////////////////////////39///8AAP//AAD//wAA//8AAP//Q0P//3Bw//9wcP//cHD//3Bw//9wcP//cHD//3Bw//9wcP//cHD//3Bw//8xMf//AAD//xER//9wcP//cHD//3Bw//9wcP//cHD//3Bw//9wcP//cHD//3Bw//9wcP//cHD//3Bw//9wcP//NTX//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAA//8AAP//AAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAKAAAADAAAABgAAAAAQAgAAAAAACAJQAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/l1d///q6v//6ur//+rq/v7q6v//6ur+/urq///q6v//6ur+/urq///q6v//6ur+/urq///q6v//6ur+/urq///q6v//JSX//wAA/v4AAP//ODj//+rq/v7q6v//6ur//+rq/v7q6v//6ur//+rq/v7q6v//6ur//+rq/v7q6v//6ur+/urq///q6v//6ur+/urq///q6v//6ur+/urq///q6v//Nzf+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pz/+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pz/+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//Li7//8HB/v7Bwf//wcH//8HB/v7Bwf//wcH//8HB/v7Bwf//wcH//8HB/v7Bwf//wcH+/sHB///Bwf//wcH+/sHB///Bwf//wcH+/sHB///Bwf//Kir+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//ODj//+rq/v7q6v//6ur//+rq/v7q6v//6ur//+rq/v7q6v//6ur//+rq/v7q6v//6ur+/urq///q6v//6ur+/urq///q6v//6ur+/urq///q6v//Nzf+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pz/+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pj7+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/mZm/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+KCj+/gAA/v4AAP7+PT3+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+Pj7+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Pz/+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/mZm//////////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v///////////v7+/v//////////KCj//wAA/v4AAP//PT3///7+/v7///////////7+/v7///////////7+/v7///////////7+/v7//////v7+/v///////////v7+/v///////////v7+/v//////////Ozv+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/hAQ/v4oKP7+KCj+/igo/v4oKP7+KCj+/igo/v4oKP7+KCj+/igo/v4oKP7+KCj+/igo/v4oKP7+KCj+/igo/v4oKP7+Bgb+/gAA/v4AAP7+CQn+/igo/v4oKP7+KCj+/igo/v4oKP7+KCj+/igo/v4oKP7+KCj+/igo/v4oKP7+KCj+/igo/v4oKP7+KCj+/igo/v4oKP7+KCj+/igo/v4oKP7+CAj+/gAA/v4AAP7+AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD//wAA/v4AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA//8AAP//AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAA/v4AAP7+AAD+/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==',
+            url: 'http://www.wanfangdata.com.cn/search/searchList.do?searchType=all&searchWord=%s',
+            favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAANlBMVEX/AAD/Q0P/cHD/MTH/ERH/NTX/mZn/////KCj/f3//fn7/Cwv/R0f/IiL/1tb/aGj/Kir/Hx9k4Po+AAAATElEQVQ4y2NgoAJgZIIDZgYWJmTAClbAxg4HTAwc7MiAk5ACrlEFuAKKmwcZ8GIqwAZIU8DLhwz4B0E4jCqAAEh6EEDEvyDW9EAhAAAGXhRW9reZoQAAAABJRU5ErkJggg==',
+            blank: true,
         };
         engineList.scholar[4] = {
             name: 'EBSCO',
             url: 'http://web.b.ebscohost.com/ehost/results?sid=8e76c941-084d-4b93-b05a-d5f182196017%40sessionmgr102&vid=1&hid=128&bquery=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACJ0lEQVQ4jZWT3UtTYRzHT+w4pzddeRFdBAbd1Z8giXtJz9mKvBDCxMqkrK57u6kEyx13zjHWIl8TEbMptaLpZMeMCgdBS8dSRC8WWAS9UJRS1j5d7AWnjuqB78UPHj58n+f7+wpFLp0il45Z1hBs7nVS0krPdoXM/YyEIpdOgaRSWt/JGZ9BvWeUOiXIUXWMxvZxGrQQTd4wTd4wrkv3sDh1LOsBYpVKaX0XPaEYmfPx6wqHlSAHLt/nlDdMZO4tyWSSHXUdmKrUXECxS0eUVIS9V3kYWQTAiCYQKlpT1itaESs9BKYWqHU/QrApuYDsYFMYnJwF4PH0G0RJxeLUKJQ1BKubbYdusvNIF2ZZzQOwKww9mcsCTJKKKKmU1PgoPzvElkoPBZK68RM3AxjRRMp++TWO6yFGns3nT2EzwIcvyzyILBB+mWD1128GJl7nvP2vgOjie6zn/Ow77+d5fInhp/P/BzCiCQSrG6GsBfsFP/1GHMHRhsX5j4BMCoWyxtaD19l1rBuzrGGWVYr3t+cH3Jmc2xijU8NU5UFwKFwZmGLPyb7sMmUBZllDKGvhbtrBxKv0ItmVlMpaqG4O8O7TN7bX3kKU1gDMskZJjY/G9nG+r/wEYPnHKg1aCMfFYaqbA6gjLwCYX/pMYdpVFmCq9LD7xG36jTg9oRgdwWm6x2L0heN0js7QOx5jcHKW3lCM0zcMxPVdyKmzdY3SFc6ptKMtJ4U/fkBXz/LD6BYAAAAASUVORK5CYII=',
+            blank: true,
         };
         engineList.scholar[5] = {
             name: 'WOS',
             url: 'http://apps.webofknowledge.com/UA_GeneralSearch.do?fieldCount=3&action=search&product=UA&search_mode=GeneralSearch&max_field_count=25&max_field_notice=Notice%3A+You+cannot+add+another+field.&input_invalid_notice=Search+Error%3A+Please+enter+a+search+term.&input_invalid_notice_limits=+%3Cbr%2F%3ENote%3A+Fields+displayed+in+scrolling+boxes+must+be+combined+with+at+least+one+other+search+field.&sa_img_alt=Select+terms+from+the+index&value(input1)=%s&value%28select1%29=TI&value%28hidInput1%29=initVoid&value%28hidShowIcon1%29=0&value%28bool_1_2%29=AND&value%28input2%29=&value%28select2%29=AU&value%28hidInput2%29=initAuthor&value%28hidShowIcon2%29=1&value%28bool_2_3%29=AND&value%28input3%29=&value%28select3%29=SO&value%28hidInput3%29=initSource&value%28hidShowIcon3%29=1&limitStatus=collapsed&expand_alt=Expand+these+settings&expand_title=Expand+these+settings&collapse_alt=Collapse+these+settings&collapse_title=Collapse+these+settings&SinceLastVisit_UTC=&SinceLastVisit_DATE=&timespanStatus=display%3A+block&timeSpanCollapsedListStatus=display%3A+none&period=Range+Selection&range=ALL&ssStatus=display%3Anone&ss_lemmatization=On&ss_query_language=&rsStatus=display%3Anone&rs_rec_per_page=10&rs_sort_by=PY.D%3BLD.D%3BVL.D%3BSO.A%3BPG.A%3BAU.A&rs_refinePanel=visibility%3Ashow',
             favicon: 'data:image/x-icon;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAABEpJREFUWAmdVl1sFFUUPmfY2S3QVoMI7XYhUSsmGqttjRZqtCIBEoT4YGrQPuiDoSXCA4nRREPqi/ENSYWiUVQSSRNSS9Q3I0GFtmoN8aeJQbQrrNAaq7S2pWS7c/3OtjPO7N6ZzuxJzt57v3PuOd/92TOXqURpr1LvsaIUGdQbL6O+gyM8VkooLmVSR5XaphR9as9FEEsxnTEUHbsnRcd2fcdZ27ZYG5nAnlpVmZ2iYZLV64TpIuDXzXI62nWBr+tc3JjhHoTpz03RK77JJYCitdDDIHmho1q1K4W9CZBAY+G8F29VN0xM0yXgFYU2vzEzfZEgeuaNUU7rfCLtwOQMtSNI6OSSEHfl4VlFP+yuVs/pCBTuwHY4PQAth4I4zUKnoBnor+2rVSfaZmhJgmQny0x66kCGr9kBCgkMw3CnbSxoT2H86O6UqqU52oyVbVFEjwCLtCNI2I+lPdZ9kf+R+G4ClRgL6Hcse2B7E+rIW43KPHeZdrBF+0GmzjEs0sG9GI4toa1df3DGTWAj5n0eMPc22H7T2eWmP5+kx615IvfqfAoxkDjXPcoN7tXK2fvJnzBok8sEZlaHrnDf4VFqwHAnVnVV8CCBT4/Y3QSCmH8bFMy2CZEjY9yTYKrH4X5j45p2bJUxf5xuAis1jjYk//3QIv/5+hp6EBMO+Ex6rfMyz4jNTeAmH2eB/wqwaU3yPcBu7MNW7y1wGNj4EB2yMTeBFTaoacc1WCioe4y7DKYXxBlkJmNET7ee4JxushQc/Ju02qabEAVDJXwZ34aiOCDkiOn0ijsTxVA05OPe+AQ+SzFa753nPoJ8ZfKanVHQBXWc/DqpwXibxeog6kXXmqGE1BNH3AT+dtDiTnUxFA5JDprPWpb1Pg5WcpVbWet4i2pxdj4sgWS4dP97SXVM9sf24610FOgS2wL8/l8Gz0pZz0tYApF2INVfuSI1YH6CDK8u5PE0IPFS3ferlwvoJvCzx8s7uMs79B8lB+JPWjwzjL/TNn8vWjU+PZ6vD24CQeX2DgRbGxCQagbNppqB2GekrB6cd1WQr9gU8xPSOpcB/aDaLb6boe9Ix5bGoUbzSvanrUy5vcpSm2x8sRbfjB+NhLmdKOt5D8g8+erd7BPgBPDWdUMVK6/NXW+2lNqCdbTiYRJUwjWh+Kv40uU70vVX819MVEePdGB0N7RiQefQji7oeWxxBxK2YFyS4A3Qa1al2tK3pOWplxf3EQjQPQ/7/tbC0uJr9TMwTRqK92XWZ98lSnu83JfQY9ANWC07gkOb1tn8MGzxqUQiVpfZIMmLJRKBzIZJVEuWwrKo4KJdMgzehVVvGmmY/d1vQiQCEsRQSzvRyGXVC/OIJL6xcl1tpin7tryS9I7zaOElDPJ1bGu+ju/M5azjDkCUwwX7Ervzwe1NzR+e5tNyeUNJSQQkMup8H5Li+ccfLTPLTp6/79/IryaJ8x9KSDhA8t6n2QAAAABJRU5ErkJggg==',
+            blank: true,
         };
         engineList.scholar[6] = {
             name: 'JSTOR',
             url: 'http://www.jstor.org/action/doAdvancedSearch?q0=%s',
             favicon: 'data:image/png;base64,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',
+            blank: true,
         };
         engineList.scholar[7] = {
             name: 'Springer',
             url: 'http://rd.springer.com/search?query=%s',
             favicon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAlVJREFUeNrsVz1SwkAUXhw7G7xBPEBGPIHhBqRMBZwAUlsAhXX0BIGKUjxB4ATgcADjCUxjrS+7X5g1f+wuYcbCN/OMLLt53/vet2+XFjMx27Po74A8IZ+z/TJhhnapGTgN2ibfkU8w2ie/MwXQ0gTwnRtZkzvkPnlM3iF/0mHkQhPwDoGyAAs8A/IXsBISUOdcALLAzxIgxnXA2Ayfe+QRgdiSvzQHwPY6oDghiqf07NIzA/DBx/bLVAs35CvM7WHdiQDES0IIUGS/X67xbRdaYBiPyV36bwjGojoQLcXgW3yKueD2y5UicIcDEKVZ0LonEwb6eA5R57Zy2QRLM5Sjr18C22tDVGkGFspwX5mtaFB5EFMwZ+F9WgyECJwpPBXesGJuhO5YZhlzPfVOaHtjLJgfrXlJZjlbIZkJzU3k913UCC9A1n7hHCiq2sn1hXwZEoCwjjMgsgkPwiu21YjTaXuuNDaSWnOVvUl6qtVAANWuKpS7Qz0jyR0+v/4MyMBZ1QAEtQNMTgqU2V540IVoQK7Unn3FzTmqYyA7aFIgr+QbCvqJ4D2Am/OdIPZ4H2z4vAOqmVMNQFDYlbbgRGo8AcD5BTZKOlyNPddrQBww7q+OZ3uB1A8YP+lkNvRsfbwRCXpdqa5jaXGEEpkEZ2VbUedGFPJbkaBfd+0Aa99N7wPOYYeclnnX9EY0kk5FE7vFZSY2BeAg+9gQQKesVatcSKL83m3AZjimlX4XLHhDatbW7N/+ih0V4efDVXY8N2mL68evuaoIO2fYBRvTn2aN248AAwDlS8jXdEymWAAAAABJRU5ErkJggg==',
+            blank: true,
         };
 
         // 新闻搜索列表
@@ -1550,11 +1460,13 @@
             name: 'Twitter',
             url: 'https://twitter.com/search?q=%s',
             favicon: icon.twitter,
+            blank: true,
         };
         engineList.news[4] = {
             name: '微博',
             url: 'https://s.weibo.com/weibo/%s',
             favicon: icon.weibo,
+            blank: true,
         };
         engineList.news[5] = {
             name: '知乎',
@@ -1563,7 +1475,7 @@
             blank: true,
         };
 
-        // 应用
+        // 应用搜索列表
         engineList.app = [];
 
         engineList.app[0] = {
@@ -1585,7 +1497,7 @@
             blank: true,
         };
 
-        // 我的
+        // 我的其他搜索列表
         engineList.mine = [];
 
         engineList.mine[0] = {
