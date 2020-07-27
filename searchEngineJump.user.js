@@ -3960,7 +3960,10 @@
         // get_data();
     }
 
+    //
     // 从此处开始执行
+    //
+
     var debug;
     function reloadDebug(bool) {
         debug = bool ? console.info.bind(console) : function() {};
