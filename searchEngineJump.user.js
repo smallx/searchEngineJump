@@ -963,14 +963,14 @@
         engineList.develop = [];
 
         engineList.develop[0] = {
-            name: 'StackOverflow',
-            url: 'https://stackoverflow.com/search?q=%s',
+            name: 'StackOverflow(谷歌)',
+            url: 'https://www.google.com/search?q=%s+site%3Astackoverflow.com',
             favicon: icon.stackoverflow,
             blank: true,
         };
         engineList.develop[1] = {
-            name: 'StackOverflow(谷歌)',
-            url: 'https://www.google.com/search?q=%s+site%3Astackoverflow.com',
+            name: 'StackOverflow',
+            url: 'https://stackoverflow.com/search?q=%s',
             favicon: icon.stackoverflow,
             blank: true,
         };
@@ -1266,14 +1266,14 @@
             blank: true,
         };
         engineList.knowledge[1] = {
-            name: 'StackOverflow',
-            url: 'https://stackoverflow.com/search?q=%s',
+            name: 'StackOverflow(谷歌)',
+            url: 'https://www.google.com/search?q=%s+site%3Astackoverflow.com',
             favicon: icon.stackoverflow,
             blank: true,
         };
         engineList.knowledge[2] = {
-            name: 'StackOverflow(谷歌)',
-            url: 'https://www.google.com/search?q=%s+site%3Astackoverflow.com',
+            name: 'StackOverflow',
+            url: 'https://stackoverflow.com/search?q=%s',
             favicon: icon.stackoverflow,
             blank: true,
         };
