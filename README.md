@@ -1,3 +1,5 @@
+> 此为我在原版基础上做的修改版, 修改内容见下面的更新历史, 不过我又开发了一个更强大的脚本 - Quick Search, 已经包含了这个脚本的所有功能, 可以直接替换掉这个了.
+
 # searchEngineJump
 
 在线安装 [Greasy Fork](https://greasyfork.org/zh-CN/scripts/27752-searchenginejump)
